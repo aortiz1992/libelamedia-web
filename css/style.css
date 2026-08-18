@@ -96,6 +96,20 @@ a { color: inherit; }
   border-color: var(--yellow);
 }
 
+.lang-switch {
+  border: 1.5px solid var(--black) !important;
+  border-radius: 999px;
+  padding: 4px 12px !important;
+  font-size: 13px !important;
+}
+
+.lang-switch:hover,
+.lang-switch:focus-visible {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black) !important;
+}
+
 /* ---------- Hero ---------- */
 .hero {
   position: relative;

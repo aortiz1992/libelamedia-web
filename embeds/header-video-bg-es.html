@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+  header-video-bg.html
+  ---------------------------------------------------------------------------
+  Header/hero background for libelamedia.com: a looping PLAYLIST of two
+  muted videos fills the embed box (object-fit: cover), a dark overlay sits
+  on top for contrast, and the white LIBELAMEDIA logo + a Lato tagline sit
+  centered above both, positioned toward the upper part of the box. Pattern
+  copied from lunas.pro's hero (inspected live: .kb-blocks-bg-video-container
+  — absolute video + relative wrapper + overlay div + content layer).
+
+  Assets: all served from GitHub + jsDelivr, same repo/CDN pattern as every
+  other component on this site (aortiz1992/libelamodelos3d).
+  - Video 1: finalrendernight.mp4 (compressed from the 22.5MB source at
+    resources/glb/Lampara/Video/Render Night 1/finalrendernight.mp4 down to
+    1.77MB: 1280x720, H.264 CRF 26, audio stripped).
+  - Video 2: render_round_final.mp4 (compressed from the 24.6MB source at
+    resources/glb/Lampara/Video/render round final/render_round_final.mp4
+    down to 2.9MB, same settings).
+  - Logo: logoletrasblanco.png (white version, for contrast over video).
+  - Font: Lato (brand font used across every other embed on this site).
+
+  Playlist behavior: video 1 plays once, then video 2 plays once, then it
+  loops back to video 1 — continuously, no `loop` attribute on the <video>
+  itself (that would prevent the 'ended' event from ever firing). To add a
+  third video, push another URL into PLAYLIST below; nothing else needs to
+  change. To change the order, just reorder PLAYLIST.
+
+  To swap the logo: change LOGO_URL and, if the new logo isn't white/light,
+  lighten OVERLAY_OPACITY so it stays legible against both videos.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --overlay-color: 1, 8, 20;
+    --overlay-opacity-desktop: 0.38;
+    --overlay-opacity-mobile: 0.46;
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #010814;
+  }
+  .stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .bg-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(var(--overlay-color), var(--overlay-opacity-desktop));
+  }
+  .content-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 10%;
+  }
+  .content-layer img {
+    width: clamp(200px, 30vw, 460px);
+    height: auto;
+    display: block;
+  }
+  .content-layer p {
+    margin: 18px 0 0 0;
+    font-family: 'Lato', Arial, sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: clamp(13px, 1.6vw, 20px);
+    text-align: center;
+  }
+  @media (max-width: 700px) {
+    .overlay {
+      background: rgba(var(--overlay-color), var(--overlay-opacity-mobile));
+    }
+    .content-layer {
+      padding-top: 14%;
+    }
+    .content-layer img {
+      width: clamp(170px, 52vw, 300px);
+    }
+    .content-layer p {
+      margin-top: 12px;
+      font-size: clamp(10px, 3.2vw, 14px);
+      letter-spacing: 0.12em;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <video
+      class="bg-video"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+    ></video>
+    <div class="overlay"></div>
+    <div class="content-layer">
+      <img
+        src="https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/logoletrasblanco.png"
+        alt="Libela Media"
+      >
+      <p>Tecnología 3D para E-Commerce</p>
+    </div>
+  </div>
+  <script>
+    var PLAYLIST = [
+      'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/finalrendernight.mp4',
+      'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/render_round_final.mp4'
+    ];
+    var idx = 0;
+    var vid = document.querySelector('.bg-video');
+    function playCurrent() {
+      vid.src = PLAYLIST[idx];
+      vid.play();
+    }
+    vid.addEventListener('ended', function () {
+      idx = (idx + 1) % PLAYLIST.length;
+      playCurrent();
+    });
+    playCurrent();
+  </script>
+</body>
+</html>

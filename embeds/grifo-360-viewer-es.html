@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<!--
+  grifo-360-viewer.html
+  ---------------------------------------------------------------------------
+  "Fake" 360 spinner for the Grifo (faucet) product card. Like the Lampara
+  configurator, this is not a real 3D model — it's a single pre-rendered
+  360-degree turntable video (143 frames, 1596x2000, 24fps, ~6s) — but here
+  the visitor drives it directly:
+
+  - At 1x zoom, drag left/right anywhere on the stage (mouse or touch) to
+    scrub through the rotation frame-by-frame, like spinning the real
+    object.
+  - Once zoomed in, dragging switches to panning around the zoomed image
+    instead (clamped so you can't pan past the edge into empty space) —
+    matching how any real photo/product zoom viewer behaves once zoomed.
+  - Below the stage: a horizontal control row (zoom in, zoom out, camera).
+    The camera button captures the CURRENTLY DISPLAYED frame — including
+    whatever zoom/pan is active — to a PNG and downloads it.
+
+  Frame-accurate scrubbing needs the video encoded with every frame as a
+  keyframe (ffmpeg -g 1) — without that, seeking during a fast drag lags
+  because the browser has to decode from the last keyframe. Re-encoded that
+  way here (see workflows source at website/resources/glb/Grifo/grifo anim
+  2.mp4 -> compressed to grifo_360.mp4, scale=1000:-2, crf 22, -g 1, audio
+  stripped). Still autoplays a slow idle rotation when untouched at 1x zoom
+  (same "resume after interaction" pattern as the other carousels/
+  configurators in this project) — dragging pauses that and hands control
+  to the visitor, resuming a few seconds after release. Autoplay stays off
+  entirely while zoomed in (zooming in to inspect detail shouldn't keep
+  spinning underneath you) and only resumes once zoom returns to 1x.
+
+  Screenshot capture draws the video onto an offscreen canvas — this only
+  works cross-origin because jsDelivr serves `Access-Control-Allow-Origin:
+  *` on every asset (confirmed via curl), so `video.crossOrigin =
+  'anonymous'` is enough to avoid a tainted-canvas error on export. Note the
+  capture always exports the full native frame (zoom/pan is a viewport
+  crop, not a re-render), since re-cropping to match the on-screen zoom
+  would need canvas math tied to the current transform — full-frame is the
+  simpler, always-correct choice here.
+
+  Served from GitHub + jsDelivr like every other asset on this site
+  (aortiz1992/libelamodelos3d).
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+    font-family: 'Lato', Arial, sans-serif;
+  }
+
+  .viewer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stage {
+    position: relative;
+    overflow: hidden;
+    touch-action: none;
+    cursor: grab;
+  }
+
+  .stage.dragging {
+    cursor: grabbing;
+  }
+
+  .stage.zoomed {
+    cursor: move;
+  }
+
+  .stage video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: translate(0px, 0px) scale(1);
+    transform-origin: center center;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hint {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    background: rgba(17, 17, 17, 0.72);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 20px;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    white-space: nowrap;
+  }
+
+  .hint.hidden {
+    opacity: 0;
+  }
+
+  .controls {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 0 4px 0;
+  }
+
+  .ctrl-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.88);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    transition: background 0.15s ease, opacity 0.15s ease;
+  }
+
+  .ctrl-btn:hover {
+    background: #ffffff;
+  }
+
+  .ctrl-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .ctrl-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: #013f7c;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ctrl-btn.camera svg {
+    fill: #013f7c;
+    stroke: none;
+  }
+
+  .flash {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  .flash.active {
+    opacity: 0.85;
+    transition: opacity 0.35s ease;
+  }
+
+  @media (max-width: 700px) {
+    .ctrl-btn {
+      width: 32px;
+      height: 32px;
+    }
+    .ctrl-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+    .controls {
+      gap: 8px;
+      padding: 10px 0 4px 0;
+    }
+    .hint {
+      font-size: 10px;
+      padding: 6px 12px;
+      bottom: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="viewer">
+    <div class="stage" id="stage">
+      <video id="video" muted loop playsinline preload="auto" crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/grifo_360.mp4"
+        aria-label="Visor 360 del grifo Libela Media — arrastra para rotar"></video>
+      <div class="hint" id="hint">Arrastra para rotar</div>
+      <div class="flash" id="flash"></div>
+    </div>
+    <div class="controls">
+      <button class="ctrl-btn" id="zoomInBtn" aria-label="Acercar" title="Acercar">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+      </button>
+      <button class="ctrl-btn" id="zoomOutBtn" aria-label="Alejar" title="Alejar">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+      </button>
+      <button class="ctrl-btn camera" id="cameraBtn" aria-label="Capturar imagen" title="Capturar imagen">
+        <svg viewBox="0 0 24 24"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"></path><circle cx="12" cy="14" r="3.5" fill="#ffffff"></circle></svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    var TOTAL_FRAMES = 143;
+    var FPS = 24;
+    var DURATION = TOTAL_FRAMES / FPS;
+    var VIDEO_ASPECT = 1596 / 2000;
+    var PX_PER_FRAME = 6;
+    var AUTOPLAY_MS_PER_FRAME = 90;
+    var RESUME_AFTER_MS = 2500;
+    var ZOOM_MIN = 1;
+    var ZOOM_MAX = 2.5;
+    var ZOOM_STEP = 0.25;
+
+    var viewer = document.querySelector('.viewer');
+    var stage = document.getElementById('stage');
+    var video = document.getElementById('video');
+    var hint = document.getElementById('hint');
+    var flash = document.getElementById('flash');
+    var zoomInBtn = document.getElementById('zoomInBtn');
+    var zoomOutBtn = document.getElementById('zoomOutBtn');
+    var cameraBtn = document.getElementById('cameraBtn');
+
+    var zoom = 1;
+    var panX = 0;
+    var panY = 0;
+    var dragging = false;
+    var dragStartX = 0;
+    var dragStartY = 0;
+    var dragStartFrame = 0;
+    var dragStartPanX = 0;
+    var dragStartPanY = 0;
+    var currentFrame = 0;
+    var autoplayTimer = null;
+    var resumeTimer = null;
+    var hintDismissed = false;
+
+    function fitStage() {
+      var availW = viewer.clientWidth;
+      var availH = viewer.clientHeight - controlsHeight();
+      if (availW <= 0 || availH <= 0) return;
+      var w = availW;
+      var h = w / VIDEO_ASPECT;
+      if (h > availH) {
+        h = availH;
+        w = h * VIDEO_ASPECT;
+      }
+      stage.style.width = w + 'px';
+      stage.style.height = h + 'px';
+      clampPan();
+      applyTransform();
+    }
+
+    function controlsHeight() {
+      var el = document.querySelector('.controls');
+      return el ? el.offsetHeight : 0;
+    }
+
+    function frameToTime(frame) {
+      var f = ((frame % TOTAL_FRAMES) + TOTAL_FRAMES) % TOTAL_FRAMES;
+      return Math.min(f / FPS, DURATION - 1 / FPS);
+    }
+
+    function showFrame(frame) {
+      currentFrame = ((frame % TOTAL_FRAMES) + TOTAL_FRAMES) % TOTAL_FRAMES;
+      video.currentTime = frameToTime(currentFrame);
+    }
+
+    function dismissHint() {
+      if (hintDismissed) return;
+      hintDismissed = true;
+      hint.classList.add('hidden');
+    }
+
+    function updateHintText() {
+      hint.textContent = zoom > 1 ? 'Arrastra para mover' : 'Arrastra para rotar';
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      if (zoom > 1) return;
+      autoplayTimer = setInterval(function () {
+        showFrame(currentFrame + 1);
+      }, AUTOPLAY_MS_PER_FRAME);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+
+    function userInteracted() {
+      stopAutoplay();
+      if (resumeTimer) clearTimeout(resumeTimer);
+      if (zoom > 1) return;
+      resumeTimer = setTimeout(startAutoplay, RESUME_AFTER_MS);
+    }
+
+    function maxPan() {
+      var rect = stage.getBoundingClientRect();
+      return {
+        x: Math.max(0, (zoom - 1) * rect.width / 2),
+        y: Math.max(0, (zoom - 1) * rect.height / 2)
+      };
+    }
+
+    function clampPan() {
+      var m = maxPan();
+      panX = Math.max(-m.x, Math.min(m.x, panX));
+      panY = Math.max(-m.y, Math.min(m.y, panY));
+    }
+
+    function applyTransform() {
+      video.style.transform = 'translate(' + panX + 'px, ' + panY + 'px) scale(' + zoom + ')';
+    }
+
+    function applyZoom() {
+      clampPan();
+      applyTransform();
+      zoomInBtn.disabled = zoom >= ZOOM_MAX;
+      zoomOutBtn.disabled = zoom <= ZOOM_MIN;
+      stage.classList.toggle('zoomed', zoom > 1);
+      updateHintText();
+      if (zoom <= ZOOM_MIN) {
+        startAutoplay();
+      } else {
+        stopAutoplay();
+        if (resumeTimer) clearTimeout(resumeTimer);
+      }
+    }
+
+    zoomInBtn.addEventListener('click', function () {
+      zoom = Math.min(ZOOM_MAX, +(zoom + ZOOM_STEP).toFixed(2));
+      applyZoom();
+    });
+
+    zoomOutBtn.addEventListener('click', function () {
+      zoom = Math.max(ZOOM_MIN, +(zoom - ZOOM_STEP).toFixed(2));
+      if (zoom === ZOOM_MIN) { panX = 0; panY = 0; }
+      applyZoom();
+    });
+
+    cameraBtn.addEventListener('click', function () {
+      var canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      flash.classList.add('active');
+      setTimeout(function () { flash.classList.remove('active'); }, 150);
+
+      canvas.toBlob(function (blob) {
+        if (!blob) return;
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'libela-media-grifo-360.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      }, 'image/png');
+    });
+
+    function pointerDown(e) {
+      dragging = true;
+      stage.classList.add('dragging');
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      dragStartFrame = currentFrame;
+      dragStartPanX = panX;
+      dragStartPanY = panY;
+      stopAutoplay();
+      if (resumeTimer) clearTimeout(resumeTimer);
+      dismissHint();
+      if (stage.setPointerCapture && e.pointerId !== undefined) {
+        try { stage.setPointerCapture(e.pointerId); } catch (err) {}
+      }
+    }
+
+    function pointerMove(e) {
+      if (!dragging) return;
+      var deltaX = e.clientX - dragStartX;
+
+      if (zoom > 1) {
+        var deltaY = e.clientY - dragStartY;
+        panX = dragStartPanX + deltaX;
+        panY = dragStartPanY + deltaY;
+        clampPan();
+        applyTransform();
+      } else {
+        var frameDelta = Math.round(deltaX / PX_PER_FRAME);
+        showFrame(dragStartFrame + frameDelta);
+      }
+    }
+
+    function pointerUp() {
+      if (!dragging) return;
+      dragging = false;
+      stage.classList.remove('dragging');
+      userInteracted();
+    }
+
+    stage.addEventListener('pointerdown', pointerDown);
+    window.addEventListener('pointermove', pointerMove);
+    window.addEventListener('pointerup', pointerUp);
+    window.addEventListener('pointercancel', pointerUp);
+
+    video.addEventListener('loadedmetadata', function () {
+      showFrame(0);
+      startAutoplay();
+    });
+
+    applyZoom();
+    fitStage();
+    window.addEventListener('resize', fitStage);
+    window.addEventListener('orientationchange', fitStage);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitStage);
+    }
+    setTimeout(fitStage, 300);
+  </script>
+</body>
+</html>
