@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!--
+  lampara-configurator-split.html
+  ---------------------------------------------------------------------------
+  Experimental version of lampara-configurator.html: instead of switching
+  between 3 whole-lamp videos, this lets the visitor pick the BASE material
+  and the SHADE material independently, recombining them live — so choices
+  never actually rendered together (e.g. White Marble base + Bronze Mesh
+  shade) become selectable, from only the same 3 source videos.
+
+  How the illusion works: the camera never moves in these 360 turntables,
+  only the lamp spins in place, so the shade (cone) and base (cylinder)
+  occupy the exact same fixed screen region in every frame of every
+  material — confirmed by comparing the same crop across all 3 source
+  videos pixel-for-pixel. That means a single static CSS clip-path split
+  (top ~52.5% = shade, bottom ~47.5% = base) works for the entire rotation,
+  no per-frame masking needed. Two video elements are layered per
+  combination — one clipped to the shade region, one clipped to the base
+  region — and whichever pair is currently selected plays in sync (their
+  currentTime is handed off on every switch, same trick as the single-video
+  version) so the seam is invisible and the lamp reads as one continuous
+  spinning object.
+
+  Distinct materials available (only 3 source videos, reused across roles):
+    BASE:  White Marble (white marble.mp4), Green Marble (green marble.mp4)
+    SHADE: Iron (iron 2.mp4), Bronze Mesh (green marble.mp4), Cream Fabric
+           (white marble.mp4)
+  White Marble base + Iron shade and Green Marble base + Bronze Mesh shade
+  and White Marble base + Cream Fabric shade are the 3 "real" pairings from
+  lampara-configurator.html; the other 3 combinations are synthetic
+  recombinations this split version makes possible.
+
+  Assets served from GitHub + jsDelivr (aortiz1992/libelamodelos3d), same
+  compressed mp4s as the single-video version — no new video processing was
+  needed, only two extra swatch thumbnail crops (shade region of green
+  marble.mp4 and white marble.mp4).
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+    font-family: 'Lato', Arial, sans-serif;
+  }
+
+  .configurator {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stage {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stage video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: none;
+  }
+
+  .stage video.active {
+    display: block;
+  }
+
+  .stage video.role-shade {
+    clip-path: inset(0 0 47.5% 0);
+  }
+
+  .stage video.role-body {
+    clip-path: inset(52.5% 0 0 0);
+  }
+
+  .controls {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 0 6px 0;
+  }
+
+  .swatch-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .row-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8a8f96;
+  }
+
+  .swatch {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid transparent;
+    padding: 0;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .swatch:hover {
+    transform: scale(1.08);
+  }
+
+  .swatch.active {
+    border-color: #111111;
+  }
+
+  @media (max-width: 700px) {
+    .swatch-row {
+      gap: 8px;
+    }
+    .swatch {
+      width: 28px;
+      height: 28px;
+    }
+    .row-label {
+      font-size: 9px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="configurator">
+    <div class="stage" id="stage"></div>
+    <div class="controls">
+      <div class="row-label">Base</div>
+      <div class="swatch-row" id="bodySwatches"></div>
+      <div class="row-label">Shade</div>
+      <div class="swatch-row" id="shadeSwatches"></div>
+    </div>
+  </div>
+
+  <script>
+    var BODY_VARIANTS = [
+      {
+        name: 'Green Marble',
+        video: 'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/lampara_green_marble.mp4',
+        swatch: 'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/lampara_swatch_green_marble.jpg'
+      },
+      {
+        name: 'White Marble',
+        video: 'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/lampara_white_marble.mp4',
+        swatch: 'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/lampara_swatch_white_marble.jpg'
+      }
+    ];
+
+    var SHADE_VARIANTS = [
+      {
+        name: 'Bronze Mesh',
+        video: 'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/lampara_green_marble.mp4',
+        swatch: 'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/lampara_swatch_shade_bronze.jpg'
+      },
+      {
+        name: 'Iron',
+        video: 'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/lampara_iron.mp4',
+        swatch: 'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/lampara_swatch_iron.jpg'
+      },
+      {
+        name: 'Cream Fabric',
+        video: 'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/lampara_white_marble.mp4',
+        swatch: 'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/lampara_swatch_shade_cream.jpg'
+      }
+    ];
+
+    var VIDEO_ASPECT = 1596 / 2000;
+
+    var configurator = document.querySelector('.configurator');
+    var stage = document.getElementById('stage');
+    var controls = document.querySelector('.controls');
+    var bodySwatchesWrap = document.getElementById('bodySwatches');
+    var shadeSwatchesWrap = document.getElementById('shadeSwatches');
+
+    var currentBody = 0;
+    var currentShade = 0;
+
+    function fitStage() {
+      var availW = configurator.clientWidth;
+      var availH = configurator.clientHeight - controls.offsetHeight;
+      if (availW <= 0 || availH <= 0) return;
+      var w = availW;
+      var h = w / VIDEO_ASPECT;
+      if (h > availH) {
+        h = availH;
+        w = h * VIDEO_ASPECT;
+      }
+      stage.style.width = w + 'px';
+      stage.style.height = h + 'px';
+    }
+
+    function buildLayer(variants, roleClass, i) {
+      var vid = document.createElement('video');
+      vid.src = variants[i].video;
+      vid.muted = true;
+      vid.loop = true;
+      vid.playsInline = true;
+      vid.preload = 'auto';
+      vid.className = roleClass;
+      vid.setAttribute('aria-hidden', 'true');
+      stage.appendChild(vid);
+      return vid;
+    }
+
+    var bodyVideos = BODY_VARIANTS.map(function (v, i) { return buildLayer(BODY_VARIANTS, 'role-body', i); });
+    var shadeVideos = SHADE_VARIANTS.map(function (v, i) { return buildLayer(SHADE_VARIANTS, 'role-shade', i); });
+
+    bodyVideos[currentBody].classList.add('active');
+    shadeVideos[currentShade].classList.add('active');
+
+    function buildSwatches(variants, wrap, onSelect) {
+      variants.forEach(function (variant, i) {
+        var swatch = document.createElement('button');
+        swatch.className = 'swatch' + (i === 0 ? ' active' : '');
+        swatch.style.backgroundImage = "url('" + variant.swatch + "')";
+        swatch.setAttribute('aria-label', variant.name);
+        swatch.setAttribute('title', variant.name);
+        swatch.addEventListener('click', function () { onSelect(i); });
+        wrap.appendChild(swatch);
+      });
+      return wrap.querySelectorAll('.swatch');
+    }
+
+    var bodySwatches = buildSwatches(BODY_VARIANTS, bodySwatchesWrap, selectBody);
+    var shadeSwatches = buildSwatches(SHADE_VARIANTS, shadeSwatchesWrap, selectShade);
+
+    function selectBody(index) {
+      if (index === currentBody) return;
+      switchLayer(bodyVideos, bodySwatches, currentBody, index, shadeVideos[currentShade].currentTime);
+      currentBody = index;
+    }
+
+    function selectShade(index) {
+      if (index === currentShade) return;
+      switchLayer(shadeVideos, shadeSwatches, currentShade, index, bodyVideos[currentBody].currentTime);
+      currentShade = index;
+    }
+
+    function switchLayer(videos, swatches, oldIndex, newIndex, referenceTime) {
+      var outgoing = videos[oldIndex];
+      var incoming = videos[newIndex];
+
+      incoming.currentTime = referenceTime;
+      outgoing.classList.remove('active');
+      swatches[oldIndex].classList.remove('active');
+
+      incoming.classList.add('active');
+      swatches[newIndex].classList.add('active');
+
+      outgoing.pause();
+      var playPromise = incoming.play();
+      if (playPromise && playPromise.catch) playPromise.catch(function () {});
+    }
+
+    bodyVideos[currentBody].play().catch(function () {});
+    shadeVideos[currentShade].play().catch(function () {});
+
+    fitStage();
+    window.addEventListener('resize', fitStage);
+    window.addEventListener('orientationchange', fitStage);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitStage);
+    }
+    setTimeout(fitStage, 300);
+  </script>
+</body>
+</html>

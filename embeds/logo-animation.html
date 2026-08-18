@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+  logo-animation.html
+  ---------------------------------------------------------------------------
+  Looping animated logo mark (the "A" isotype tumbling in 3D) with a
+  transparent background — for the footer or any spot that wants a small
+  branded animation instead of a static logo.
+
+  Video: libela_logo_loop_v2.webm — VP9 with alpha channel, 512x512, 30fps,
+  loops seamlessly (starts/ends at the same frame), encoded from the 243
+  PNG frames in logo/animation 2/ (rainbow-edge glass version). Served from
+  GitHub + jsDelivr like every other asset on this site
+  (aortiz1992/libelamodelos3d).
+
+  Filename note: this was originally libela_logo_loop.webm. When the
+  content was updated in place (same filename, new commit), jsDelivr's
+  @main-branch edge cache kept serving the old version on some edges for a
+  long time even after purge.jsdelivr.net reported the purge as "finished"
+  — confirmed the GitHub source was correct the whole time, it was purely a
+  CDN propagation issue. Renaming to a filename never seen by the CDN
+  before (_v2) guarantees an instantly fresh, never-cached URL with no
+  purge step needed. If this asset is updated again in the future, prefer
+  bumping the filename (_v3, etc.) over overwriting in place, unless a
+  purge is confirmed to have actually taken effect first.
+
+  Note: this is WebM/VP9 with real alpha transparency, not a chroma-key
+  trick — supported in Chrome/Firefox/Edge. Safari does not support alpha
+  in WebM video, so on Safari this will show with an opaque black
+  background box instead of transparent — acceptable for a footer element,
+  but worth knowing if it ever needs to look perfect there too.
+
+  Sizing: the video is square (1:1) and the embed box in Google Sites can
+  be any shape, so — same technique as studio-images-carousel.html — a
+  small script measures the actual available box and sets the video's
+  width/height to the largest centered square that fits, in pixels,
+  instead of relying on CSS aspect-ratio (which rendered inconsistently
+  in at least one embed context on this site).
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  video {
+    display: block;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap" id="wrap">
+    <video id="logoVideo" autoplay loop muted playsinline>
+      <source src="https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/libela_logo_loop_v2.webm" type="video/webm">
+    </video>
+  </div>
+
+  <script>
+    var wrap = document.getElementById('wrap');
+    var video = document.getElementById('logoVideo');
+
+    function fitSquare() {
+      var size = Math.max(0, Math.min(wrap.clientWidth, wrap.clientHeight));
+      video.style.width = size + 'px';
+      video.style.height = size + 'px';
+    }
+
+    fitSquare();
+    window.addEventListener('resize', fitSquare);
+    window.addEventListener('orientationchange', fitSquare);
+    setTimeout(fitSquare, 300);
+  </script>
+</body>
+</html>

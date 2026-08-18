@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+  walkthrough-360-video.html
+  ---------------------------------------------------------------------------
+  Video embed for the "360° Walkthrough" content section on the home page
+  (the empty placeholder box under "Capture a space with 100% precision.
+  Also available for Real State and Business."). Not a real interactive
+  panorama viewer — it's a single pre-recorded flythrough capture of a
+  Matterport-style "dollhouse" 3D scan (see workflows source at
+  website/resources/360 walkthorught/done_video.mp4), so a plain HTML5
+  <video> with native controls is all this needs.
+
+  Source video was 1920x1080/60fps/~44s/80MB — compressed with ffmpeg
+  (scale=1600:-2, fps=30, libx264 crf 23, faststart, audio stripped since
+  the source has no audio track) down to ~16MB as walkthrough_360.mp4.
+  Poster image is a cropped mid-video frame (the 3/4 dollhouse angle reads
+  much better as a static thumbnail than frame 0, which is a flat top-down
+  floorplan view with Matterport UI chrome still visible).
+
+  Served from GitHub + jsDelivr like every other asset on this site
+  (aortiz1992/libelamodelos3d).
+
+  Sizing: the video keeps its native 16:9 aspect ratio via object-fit:
+  contain inside a flex-centered wrapper that fills whatever box Google
+  Sites gives this embed — no JS-computed pixel sizing needed here (unlike
+  the image carousels/configurators elsewhere on this site) since this is a
+  single non-stacked element, so plain object-fit is reliable.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    background: #000000;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <video
+      controls
+      muted
+      autoplay
+      loop
+      playsinline
+      preload="auto"
+      poster="https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/walkthrough_360_poster.jpg"
+      aria-label="Libela Media 360 walkthrough video">
+      <source src="https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/walkthrough_360.mp4" type="video/mp4">
+    </video>
+  </div>
+</body>
+</html>
