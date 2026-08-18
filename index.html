@@ -170,8 +170,8 @@
       </div>
 
       <div class="service-block reverse">
-        <div class="service-media square">
-          <iframe src="embeds/grifo-360-viewer.html" title="360 degree product viewer" loading="lazy"></iframe>
+        <div class="service-media square" id="grifoMedia">
+          <iframe src="embeds/grifo-360-viewer.html" title="360 degree product viewer" loading="lazy" id="grifoFrame"></iframe>
         </div>
         <div class="service-copy">
           <h3>360º Viewers</h3>
@@ -192,8 +192,8 @@
       </div>
 
       <div class="service-block reverse">
-        <div class="service-media square">
-          <iframe src="embeds/lampara-configurator-split.html" title="Interactive product configurator" loading="lazy"></iframe>
+        <div class="service-media square" id="lamparaMedia">
+          <iframe src="embeds/lampara-configurator-split.html" title="Interactive product configurator" loading="lazy" id="lamparaFrame"></iframe>
         </div>
         <div class="service-copy">
           <h3>Product Configurator</h3>
@@ -318,6 +318,54 @@
     <p class="footer-copy">&copy; 2026 Libela Media. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+  // The Product Configurator's viewer sits shorter than the 360 Viewer's even in an
+  // identically-sized square box, because its two-row material swatch panel reserves more
+  // vertical space than the 360 Viewer's single row of icon buttons. Both embeds are
+  // same-origin, so instead of guessing a fixed size, measure the 360 Viewer's actual visible
+  // stage height and the configurator's actual controls height, then size the configurator's
+  // box so its own visible stage comes out to the same height.
+  (function () {
+    var grifoFrame = document.getElementById('grifoFrame');
+    var lamparaFrame = document.getElementById('lamparaFrame');
+    var lamparaMedia = document.getElementById('lamparaMedia');
+    if (!grifoFrame || !lamparaFrame || !lamparaMedia) return;
+
+    function heightOf(frame, selector) {
+      try {
+        var doc = frame.contentDocument;
+        var el = doc && doc.querySelector(selector);
+        return el ? el.getBoundingClientRect().height : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function sync() {
+      var grifoStageH = heightOf(grifoFrame, '#stage');
+      var lamparaControlsH = heightOf(lamparaFrame, '.controls');
+      if (grifoStageH == null || lamparaControlsH == null) return false;
+      lamparaMedia.style.height = (grifoStageH + lamparaControlsH) + 'px';
+      if (lamparaFrame.contentWindow) {
+        lamparaFrame.contentWindow.dispatchEvent(new Event('resize'));
+      }
+      return true;
+    }
+
+    var attempts = 0;
+    var poll = setInterval(function () {
+      attempts++;
+      if (sync() || attempts > 40) clearInterval(poll);
+    }, 300);
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(sync, 200);
+    });
+  })();
+</script>
 
 </body>
 </html>
