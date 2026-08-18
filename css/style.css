@@ -373,9 +373,11 @@ a { color: inherit; }
 }
 
 .about-person img {
-  border-radius: 16px;
   width: 200px;
-  height: auto;
+  height: 200px;
+  object-fit: cover;
+  object-position: 50% 15%;
+  border-radius: 50%;
   margin-bottom: 28px;
 }
 
@@ -612,6 +614,6 @@ a { color: inherit; }
   .main-nav ul { gap: 18px; }
   .main-nav a { font-size: 13px; }
   .stats-grid { grid-template-columns: 1fr; }
-  .about-person img { width: 160px; }
+  .about-person img { width: 160px; height: 160px; }
   .site-footer .wrap { flex-direction: column; text-align: center; }
 }
