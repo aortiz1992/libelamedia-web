@@ -496,6 +496,14 @@
       resizeTimer = setTimeout(sync, 200);
     });
   })();
+
+  // The logo links to #top, but #top is the sticky header itself — since a sticky element
+  // is already visually pinned at the top of the viewport, the browser sees it as "already
+  // in view" and barely scrolls. Force an actual scroll to the top of the page instead.
+  document.querySelector('.brand-mark').addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 
 </body>
