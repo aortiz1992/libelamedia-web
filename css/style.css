@@ -435,6 +435,71 @@ a { color: inherit; }
   color: var(--black);
 }
 
+/* ---------- Demo promo band ---------- */
+.demo-promo {
+  background: var(--gray-bg);
+  padding: 72px 0;
+}
+
+.demo-promo .wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.demo-promo-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.demo-promo-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.demo-promo-media:hover img { transform: scale(1.04); }
+
+.demo-promo-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--yellow);
+  color: var(--black);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 999px;
+}
+
+.demo-promo-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin: 0 0 8px;
+}
+
+.demo-promo-copy h3 {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 900;
+  margin: 0 0 16px;
+}
+
+.demo-promo-copy p {
+  color: var(--gray-text);
+  font-size: 16px;
+  margin: 0 0 28px;
+}
+
 /* ---------- Why us ---------- */
 .why-section {
   background: var(--black);
@@ -746,7 +811,8 @@ a { color: inherit; }
 @media (max-width: 860px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .service-block,
-  .about-location {
+  .about-location,
+  .demo-promo .wrap {
     grid-template-columns: 1fr;
     gap: 28px;
   }
