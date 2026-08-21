@@ -17,4 +17,14 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://www.libelamedia.com/es/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.libelamedia.com/" />
   </url>
+  <url>
+    <loc>https://www.libelamedia.com/demo/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.libelamedia.com/demo/shoe-ecommerce/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

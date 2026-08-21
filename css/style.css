@@ -1,4 +1,4 @@
-/* Libela Media — brand tokens: black / white / yellow, Lato typeface (matches live site + embeds) */
+/* LIBELAMEDIA — brand tokens: black / white / yellow, Lato typeface (matches live site + embeds) */
 :root {
   --black: #000000;
   --near-black: #111111;
@@ -347,6 +347,92 @@ a { color: inherit; }
 .btn-demo:focus-visible {
   background: var(--black);
   color: var(--yellow);
+}
+
+/* ---------- Demos hub ---------- */
+.demos-section {
+  padding: 72px 0 88px;
+}
+
+.demos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 40px;
+}
+
+.demo-card {
+  border: 1px solid var(--gray-line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--white);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.demo-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.demo-card-media {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.demo-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.demo-card:hover .demo-card-media img {
+  transform: scale(1.04);
+}
+
+.demo-card-body {
+  padding: 28px 28px 32px;
+}
+
+.demo-card-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin: 0 0 8px;
+}
+
+.demo-card-body h3 {
+  font-size: 22px;
+  font-weight: 900;
+  margin: 0 0 12px;
+}
+
+.demo-card-body p {
+  color: var(--gray-text);
+  font-size: 15px;
+  margin: 0 0 24px;
+}
+
+.btn-view-demo {
+  display: inline-block;
+  background: var(--black);
+  border: 2px solid var(--black);
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 28px;
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-view-demo:hover,
+.btn-view-demo:focus-visible {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--black);
 }
 
 /* ---------- Why us ---------- */
