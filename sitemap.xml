@@ -26,5 +26,16 @@
     <loc>https://www.libelamedia.com/demo/shoe-ecommerce/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.libelamedia.com/demo/shoe-ecommerce/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.libelamedia.com/demo/shoe-ecommerce/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.libelamedia.com/demo/shoe-ecommerce/" />
+  </url>
+  <url>
+    <loc>https://www.libelamedia.com/demo/shoe-ecommerce/es/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.libelamedia.com/demo/shoe-ecommerce/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.libelamedia.com/demo/shoe-ecommerce/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.libelamedia.com/demo/shoe-ecommerce/" />
   </url>
 </urlset>
