@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  /* Remember a language chosen with the flag switch, so the homepage never overrides it. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('.lang-switch');
+    if (a) { try { localStorage.setItem('libela-lang', a.hreflang); } catch (err) {} }
+  });
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1CMDVY6LVZ"></script>
 <script>

@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  /* Spanish-language browsers land on /es/ unless the visitor already picked a language. Crawlers are left alone. */
+  (function () {
+    if (/bot|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent)) return;
+    var saved = null;
+    try { saved = localStorage.getItem('libela-lang'); } catch (err) {}
+    var lang = saved || ((navigator.languages && navigator.languages[0]) || navigator.language || '').toLowerCase();
+    if (lang.indexOf('es') === 0) location.replace('/es/' + location.search + location.hash);
+  })();
+</script>
+<script>
+  /* Remember a language chosen with the flag switch, so the homepage never overrides it. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('.lang-switch');
+    if (a) { try { localStorage.setItem('libela-lang', a.hreflang); } catch (err) {} }
+  });
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1CMDVY6LVZ"></script>
 <script>
