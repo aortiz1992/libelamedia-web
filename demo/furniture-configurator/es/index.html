@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script>
+  /* Remember a language chosen with the flag switch, so the homepage never overrides it. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('.lang-switch');
+    if (a) { try { localStorage.setItem('libela-lang', a.hreflang); } catch (err) {} }
+  });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1CMDVY6LVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1CMDVY6LVZ');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Configurador 3D de almacenaje — Demo de LIBELAMEDIA</title>
+<meta name="description" content="Demo en vivo: un configurador 3D de muebles modulares. Añade módulos, cambia diseños, frentes, estructuras y tiradores, y mira cómo se actualizan el precio y las medidas en una habitación real.">
+<link rel="canonical" href="https://www.libelamedia.com/demo/furniture-configurator/es/">
+<link rel="alternate" hreflang="en" href="https://www.libelamedia.com/demo/furniture-configurator/">
+<link rel="alternate" hreflang="es" href="https://www.libelamedia.com/demo/furniture-configurator/es/">
+<link rel="alternate" hreflang="x-default" href="https://www.libelamedia.com/demo/furniture-configurator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LIBELAMEDIA">
+<meta property="og:title" content="Configurador 3D de almacenaje — Demo de LIBELAMEDIA">
+<meta property="og:description" content="Demo en vivo: un configurador 3D de muebles modulares. Añade módulos, cambia diseños, frentes, estructuras y tiradores, y mira cómo se actualizan el precio y las medidas en una habitación real.">
+<meta property="og:url" content="https://www.libelamedia.com/demo/furniture-configurator/es/">
+<meta property="og:image" content="https://www.libelamedia.com/assets/images/og-cover.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../css/style.css?v=28260915163813">
+<link rel="stylesheet" href="/demo/furniture-configurator/configurator.css?v=28">
+<link rel="preload" as="fetch" crossorigin href="https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@3eedae800f7b81c8e30c7167f701643a80581ba0/furniture_configurator.glb">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+
+<a href="#main" class="visually-hidden">Saltar al contenido</a>
+
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a href="/es/" class="brand-mark"><img src="../../../assets/images/libela-logo-black.png" alt="LIBELAMEDIA" width="180" height="20"></a>
+    <nav class="main-nav" aria-label="Principal">
+      <ul>
+        <li><a href="/es/#services">Servicios</a></li>
+        <li><a href="/demo/es/">Demos</a></li>
+        <li><a href="/es/#about">Sobre Nosotros</a></li>
+        <li><a href="/es/#faq">Preguntas frecuentes</a></li>
+        <li><a href="#contact">Contacto</a></li>
+        <li><a href="/demo/furniture-configurator/" class="lang-switch" hreflang="en" aria-label="View this page in English"><svg class="flag-icon" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><rect width="30" height="20" fill="#012169"/><path d="M0 0l30 20M30 0L0 20" stroke="#ffffff" stroke-width="4"/><path d="M0 0l30 20M30 0L0 20" stroke="#c8102e" stroke-width="2"/><path d="M15 0v20M0 10h30" stroke="#ffffff" stroke-width="6.5"/><path d="M15 0v20M0 10h30" stroke="#c8102e" stroke-width="4"/></svg></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<main id="main">
+
+  <section class="cfg" aria-label="Configurador de almacenaje">
+    <div class="cfg-stage" id="cfg-stage">
+      <div class="cfg-canvas" id="cfg-canvas"></div>
+      <div class="cfg-labels" id="cfg-labels"></div>
+
+      <div class="cfg-float" id="cfg-float" hidden>
+        <button type="button" data-action="left" data-t-label="moveL"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" data-action="right" data-t-label="moveR"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <button type="button" data-action="duplicate" data-t-label="duplicate"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 00-1-1H5a1 1 0 00-1 1v10a1 1 0 001 1h3"/></svg></button>
+        <button type="button" data-action="remove" data-t-label="remove"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></button>
+      </div>
+
+      <p class="cfg-empty" id="cfg-empty" data-t="empty" hidden></p>
+
+      <div class="cfg-tools cfg-tools--view">
+        <button type="button" class="cfg-tool" id="btn-dims" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/></svg><span class="cfg-tool-text" data-t="dims"></span></button>
+        <button type="button" class="cfg-tool" id="btn-shuffle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h3.6l9.4 10H21M3 17h3.6l9.4-10H21"/><path d="M18 4l3 3-3 3M18 14l3 3-3 3"/></svg><span class="cfg-tool-text" data-t="shuffle"></span></button>
+        <button type="button" class="cfg-tool" id="btn-tv" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="1.5"/><path d="M8 20h8"/></svg><span class="cfg-tool-text" data-t="tv"></span></button>
+        <button type="button" class="cfg-tool" id="btn-doll" aria-pressed="false" data-t-label="dollHouseLong"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l8.4 4.85v9.7L12 22l-8.4-4.85v-9.7z"/><path d="M12 12.3l8.4-4.85M12 12.3V22M12 12.3L3.6 7.45"/></svg><span class="cfg-tool-text" data-t="dollHouse"></span></button>
+        <button type="button" class="cfg-tool" id="btn-view"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="cfg-tool-text" data-t="resetView"></span></button>
+      </div>
+      <div class="cfg-tools cfg-tools--history">
+        <button type="button" class="cfg-tool" id="btn-undo" data-t-label="undo" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 010 10h-3"/></svg></button>
+        <button type="button" class="cfg-tool" id="btn-redo" data-t-label="redo" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 14l5-5-5-5"/><path d="M20 9H9a5 5 0 000 10h3"/></svg></button>
+      </div>
+
+      <div class="cfg-loading" id="cfg-loading">
+        <span class="cfg-loading-label"></span>
+        <span class="cfg-loading-bar"><span></span></span>
+      </div>
+    </div>
+
+    <aside class="cfg-panel" aria-label="Configuración">
+      <div class="cfg-panel-top">
+        <div>
+          <h1>Configurador de almacenaje</h1>
+          <p class="cfg-size" id="cfg-size">—</p>
+        </div>
+        <div class="cfg-price-box">
+          <strong class="cfg-price" id="cfg-price">—</strong>
+          <button type="button" class="cfg-summary-btn" id="btn-summary"><span data-t="summary"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="cfg-panel-body" id="cfg-panel-body"></div>
+      <p class="cfg-panel-foot" id="cfg-demo-note"></p>
+    </aside>
+  </section>
+
+  <dialog class="cfg-summary" id="cfg-summary" aria-labelledby="cfg-sum-title">
+    <div class="cfg-sum-in">
+      <div class="cfg-sum-head">
+        <div>
+          <h2 id="cfg-sum-title" data-t="summaryTitle"></h2>
+          <p class="cfg-sum-size"></p>
+        </div>
+        <button type="button" class="cfg-x" data-close data-t-label="close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <table class="cfg-sum-table">
+        <thead><tr><th></th><th></th><th class="num" data-t="qty"></th><th class="num"></th></tr></thead>
+        <tbody class="cfg-sum-rows"></tbody>
+      </table>
+      <div class="cfg-sum-foot"><span data-t="total"></span><strong class="cfg-sum-total"></strong></div>
+      <p class="cfg-sum-note" data-t="demoPrices"></p>
+      <div class="cfg-sum-cta">
+        <p data-t="ctaTitle"></p>
+        <div class="cfg-sum-actions">
+          <button type="button" id="btn-share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/></svg><span data-t="share"></span></button>
+          <a href="#contact" data-close><span data-t="cta"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <section class="cfg-about">
+    <div class="wrap">
+      <h2>Una escena 3D convertida en un configurador que tus clientes pueden usar.</h2>
+      <div>
+        <p>Cada módulo, frente y tirador sale del mismo archivo. Preparamos el modelo, lo comprimimos para la web y construimos el configurador alrededor de tu catálogo real: tus diseños, tus acabados y tus precios.</p>
+        <ul>
+          <li>Los módulos se alinean contra la pared, y los de pared buscan el hueco libre sobre los bajos.</li>
+          <li>Frentes, estructuras y tiradores se cambian por módulo o todos a la vez. Las puertas llevan barras verticales y los cajones, horizontales.</li>
+          <li>Las medidas y el precio se actualizan con cada cambio, y cualquier composición se puede compartir con un enlace.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact-section" id="contact">
+    <div class="wrap">
+      <p class="eyebrow">Contacto</p>
+      <h2>¡Ponte en contacto!</h2>
+      <div class="contact-links">
+        <a href="mailto:info@libelamedia.com">info@libelamedia.com</a>
+        <a href="https://wa.me/34623312517" target="_blank" rel="noopener">+34 623 31 25 17 (WhatsApp)</a>
+      </div>
+      <p class="contact-address">LIBELAMEDIA — El Torno, Cáceres, España</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand"><img src="../../../assets/images/libela-logo-white.png" alt="LIBELAMEDIA" width="160" height="18"></div>
+    <div class="social-links">
+      <a href="https://www.instagram.com/libelamedia/" target="_blank" rel="noopener" aria-label="LIBELAMEDIA en Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 3.3.15 4.8 1.7 5 5 .06 1.3.07 1.6.07 4.8s0 3.5-.07 4.8c-.15 3.3-1.7 4.8-5 5-1.3.06-1.6.07-4.9.07s-3.6 0-4.9-.07c-3.3-.15-4.8-1.7-5-5C2.1 15.5 2.1 15.2 2.1 12s0-3.5.07-4.8c.15-3.3 1.7-4.8 5-5C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.07-2.4.1-3.5 1.2-3.6 3.6C3.6 8.5 3.6 8.9 3.6 12s0 3.5.06 4.7c.1 2.4 1.2 3.5 3.6 3.6 1.2.06 1.6.07 4.7.07s3.5 0 4.7-.07c2.4-.1 3.5-1.2 3.6-3.6.06-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.1-2.4-1.2-3.5-3.6-3.6C15.5 4 15.1 4 12 4zm0 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 1.8a2.7 2.7 0 100 5.4 2.7 2.7 0 000-5.4zm4.7-2a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg>
+      </a>
+      <a href="https://x.com/Libelamedia" target="_blank" rel="noopener" aria-label="LIBELAMEDIA en X">
+        <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-6.9l-5.4-6.9L4.8 22H1.7l8.1-9.3L1 2h7l4.9 6.3L18.9 2zm-1.2 18h1.9L7.4 3.9H5.3L17.7 20z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/libelamedia" target="_blank" rel="noopener" aria-label="LIBELAMEDIA en LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V21h-4V9z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@Libelamedia" target="_blank" rel="noopener" aria-label="LIBELAMEDIA en YouTube">
+        <svg viewBox="0 0 24 24"><path d="M22.5 6.2a2.8 2.8 0 00-2-2C18.7 3.7 12 3.7 12 3.7s-6.7 0-8.5.5a2.8 2.8 0 00-2 2A29 29 0 001 12a29 29 0 00.5 5.8 2.8 2.8 0 002 2c1.8.5 8.5.5 8.5.5s6.7 0 8.5-.5a2.8 2.8 0 002-2A29 29 0 0023 12a29 29 0 00-.5-5.8zM9.8 15.5v-7l6 3.5-6 3.5z"/></svg>
+      </a>
+    </div>
+    <p class="footer-copy">&copy; 2026 LIBELAMEDIA. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script type="module" src="/demo/furniture-configurator/configurator.js?v=28"></script>
+</body>
+</html>

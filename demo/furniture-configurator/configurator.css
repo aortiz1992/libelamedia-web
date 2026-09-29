@@ -1,0 +1,338 @@
+/* Storage configurator. Builds on the site tokens in css/style.css. */
+.cfg, .cfg-summary {
+  --panel-w: clamp(340px, 28vw, 420px);
+  --stage-bg: #ecebe7;
+  --ink: #111111;
+  --line: #e4e2dc;
+  --muted: #5d5b56;
+  --walnut: linear-gradient(115deg, #5b3a24 0%, #7a5134 38%, #4f311d 62%, #6d4830 100%);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cfg {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--panel-w);
+  height: calc(100svh - 65px);
+  min-height: 560px;
+  border-top: 1px solid var(--line);
+  background: var(--white);
+}
+
+.cfg [hidden] { display: none !important; }
+
+/* ---------------------------------------------------------------- stage -- */
+.cfg-stage {
+  position: relative;
+  background: var(--stage-bg);
+  overflow: hidden;
+  isolation: isolate;
+}
+.cfg-canvas, .cfg-canvas canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.cfg-canvas canvas { touch-action: none; outline: none; }
+.cfg-canvas canvas:focus-visible { box-shadow: inset 0 0 0 3px var(--yellow); }
+.cfg-stage canvas { opacity: 0; transition: opacity .6s var(--ease-out); }
+.cfg-stage.is-ready canvas { opacity: 1; }
+
+.cfg-labels { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.cfg-dim {
+  position: absolute; left: 0; top: 0;
+  padding: 3px 8px;
+  background: var(--ink); color: var(--white);
+  font: 700 12px/1.2 var(--font);
+  font-variant-numeric: tabular-nums;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.cfg-loading {
+  position: absolute; inset: 0; z-index: 5;
+  display: grid; place-content: center; gap: 14px; justify-items: center;
+  background: var(--stage-bg);
+  font-weight: 700; color: var(--ink);
+}
+.cfg-loading-bar { width: 180px; height: 3px; background: rgba(0,0,0,.1); overflow: hidden; border-radius: 3px; }
+.cfg-loading-bar span { display: block; height: 100%; background: var(--ink); transform: scaleX(.04); transform-origin: left; transition: transform .25s ease-out; }
+.cfg-loading.is-error .cfg-loading-bar { display: none; }
+.cfg-loading.is-error .cfg-loading-label { max-width: 32ch; text-align: center; font-weight: 400; }
+
+.cfg-empty {
+  position: absolute; left: 50%; top: 44%; z-index: 3;
+  transform: translate(-50%, -50%);
+  max-width: 30ch; text-align: center;
+  padding: 16px 20px; border-radius: 10px;
+  background: var(--white); color: var(--ink);
+  box-shadow: 0 8px 28px rgba(0,0,0,.12);
+  font-weight: 700;
+}
+
+/* tool clusters */
+.cfg-tools {
+  position: absolute; z-index: 4;
+  display: flex; gap: 6px; padding: 6px;
+  background: rgba(255,255,255,.92);
+  border-radius: 999px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.12);
+}
+.cfg-tools--view { left: 16px; bottom: 16px; }
+.cfg-tools--history { right: 16px; bottom: 16px; }
+.cfg-tool {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 40px; padding: 0 14px;
+  border: 0; border-radius: 999px;
+  background: transparent; color: var(--ink);
+  font: 700 13px/1 var(--font);
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+.cfg-tool svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.cfg-tool:hover { background: #f0efeb; }
+.cfg-tool[aria-pressed="true"] { background: var(--ink); color: var(--yellow); }
+.cfg-tool:disabled { opacity: .35; cursor: not-allowed; background: transparent; }
+.cfg-tools--history .cfg-tool { width: 40px; padding: 0; justify-content: center; }
+
+/* floating toolbar over the selected module */
+.cfg-float {
+  position: absolute; left: 0; top: 0; z-index: 4;
+  display: flex; gap: 2px; padding: 4px;
+  background: var(--ink); border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.25);
+}
+.cfg-float button {
+  width: 36px; height: 36px; border: 0; border-radius: 999px;
+  display: grid; place-items: center;
+  background: transparent; color: var(--white); cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+.cfg-float button:hover { background: #2a2a2a; color: var(--yellow); }
+.cfg-float button:disabled { opacity: .3; cursor: not-allowed; background: transparent; color: var(--white); }
+.cfg-float svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------------------------------------------------------------- panel -- */
+.cfg-panel {
+  display: flex; flex-direction: column;
+  min-height: 0;
+  border-left: 1px solid var(--line);
+  background: var(--white);
+}
+.cfg-panel-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.cfg-panel-top h1 { margin: 0; font-size: 20px; font-weight: 900; line-height: 1.1; letter-spacing: -0.01em; }
+.cfg-size { margin: 4px 0 0; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cfg-price-box { text-align: right; }
+.cfg-price { display: block; font-size: 24px; font-weight: 900; line-height: 1; font-variant-numeric: tabular-nums; }
+.cfg-summary-btn {
+  margin-top: 8px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border: 0; border-radius: 999px;
+  background: var(--ink); color: var(--white);
+  font: 700 13px/1 var(--font); cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+.cfg-summary-btn:hover { background: var(--yellow); color: var(--ink); }
+.cfg-summary-btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.cfg-panel-body {
+  flex: 1; min-height: 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  padding: 4px 22px 28px;
+  scrollbar-width: thin; scrollbar-color: #c9c6be transparent;
+}
+.cfg-panel-body::-webkit-scrollbar { width: 8px; }
+.cfg-panel-body::-webkit-scrollbar-thumb { background: #c9c6be; border-radius: 8px; }
+.cfg-panel-foot {
+  padding: 10px 22px; border-top: 1px solid var(--line);
+  font-size: 12px; color: var(--muted);
+}
+
+.cfg-sec { padding: 22px 0 6px; }
+.cfg-sec + .cfg-sec { border-top: 1px solid var(--line); }
+.cfg-sec h3 { margin: 0 0 14px; font-size: 16px; font-weight: 900; letter-spacing: -0.005em; }
+.cfg-sec h4 { margin: 18px 0 10px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.cfg-note { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+.cfg-msg { margin: 10px 0 0; min-height: 1.2em; font-size: 13px; font-weight: 700; color: #9a1b1b; }
+
+/* catalogue rows */
+.cfg-adds { display: grid; gap: 6px; }
+.cfg-add {
+  display: grid; grid-template-columns: 56px minmax(0,1fr) auto; align-items: center; gap: 12px;
+  width: 100%; padding: 8px 12px 8px 6px;
+  border: 1px solid var(--line); border-radius: 10px;
+  background: var(--white); color: var(--ink);
+  font: inherit; text-align: left; cursor: pointer;
+  transition: border-color .15s ease, transform .15s var(--ease-out), box-shadow .15s ease;
+}
+.cfg-add:hover { border-color: var(--ink); box-shadow: 0 4px 14px rgba(0,0,0,.08); transform: translateY(-1px); }
+.cfg-add:active { transform: translateY(0); }
+.cfg-add-text { display: grid; gap: 1px; min-width: 0; }
+.cfg-add-name { font-size: 12px; color: var(--muted); font-weight: 700; }
+.cfg-add-design { font-size: 15px; font-weight: 700; }
+.cfg-add-size { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cfg-add-price { font-weight: 900; font-size: 15px; font-variant-numeric: tabular-nums; }
+.cfg-ico { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; display: block; }
+
+/* composition list */
+.cfg-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; counter-reset: mod; }
+.cfg-list button {
+  width: 100%; display: grid; grid-template-columns: 22px 32px minmax(0,1fr) auto; align-items: center; gap: 10px;
+  padding: 6px 10px; border: 0; border-radius: 8px;
+  background: #f5f4f1; color: var(--ink); font: 700 14px/1.2 var(--font); text-align: left; cursor: pointer;
+  counter-increment: mod;
+  transition: background-color .15s ease;
+}
+.cfg-list button::before { content: counter(mod); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cfg-list button:hover { background: #ebe9e3; }
+.cfg-list-price { font-variant-numeric: tabular-nums; }
+
+/* swatches */
+.cfg-swatches { display: flex; flex-wrap: wrap; gap: 10px 6px; }
+.cfg-swatch {
+  display: grid; justify-items: center; gap: 6px;
+  width: 62px; padding: 4px 0;
+  border: 0; background: none; cursor: pointer;
+  font: 700 12px/1.2 var(--font); color: var(--ink);
+}
+.cfg-swatch-chip {
+  width: 40px; height: 40px; border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.14);
+  outline: 2px solid transparent; outline-offset: 3px;
+  transition: outline-color .15s ease, transform .2s var(--ease-out);
+}
+.cfg-swatch:hover .cfg-swatch-chip { transform: scale(1.06); }
+.cfg-swatch[aria-checked="true"] .cfg-swatch-chip { outline-color: var(--ink); }
+.cfg-swatch[aria-checked="true"] .cfg-swatch-name::after {
+  content: ''; display: block; height: 3px; margin-top: 3px; background: var(--yellow);
+}
+.cfg-swatch:disabled { opacity: .35; cursor: not-allowed; }
+
+/* segmented */
+.cfg-seg { display: flex; padding: 4px; gap: 4px; background: #f2f1ed; border-radius: 999px; }
+.cfg-seg button {
+  flex: 1; height: 36px; border: 0; border-radius: 999px;
+  background: transparent; color: var(--ink);
+  font: 700 13px/1 var(--font); cursor: pointer;
+  transition: background-color .15s ease, box-shadow .15s ease;
+}
+.cfg-seg button:hover { background: rgba(255,255,255,.7); }
+.cfg-seg button[aria-checked="true"] { background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,.1), inset 0 -3px 0 var(--yellow); }
+
+/* module editor */
+.cfg-mod-head { padding: 16px 0 4px; }
+.cfg-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin: 0 0 14px 0; padding: 6px 10px 6px 4px;
+  border: 0; border-radius: 999px; background: none; cursor: pointer;
+  font: 700 13px/1 var(--font); color: var(--muted);
+}
+.cfg-back:hover { color: var(--ink); background: #f2f1ed; }
+.cfg-back svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cfg-mod-title { margin: 0; font-size: 22px; font-weight: 900; line-height: 1.15; letter-spacing: -0.01em; }
+.cfg-mod-title span { display: inline-block; margin-right: 6px; padding: 2px 8px; background: var(--yellow); border-radius: 4px; font-size: 13px; vertical-align: 3px; }
+.cfg-mod-meta { margin: 6px 0 0; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cfg-mod-meta strong { color: var(--ink); }
+.cfg-designs { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+.cfg-design {
+  display: grid; justify-items: center; gap: 4px;
+  padding: 8px 6px 10px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--white); cursor: pointer;
+  font: 700 12px/1.25 var(--font); color: var(--ink); text-align: center;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.cfg-design:hover { border-color: var(--ink); }
+.cfg-design[aria-checked="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); font-weight: 900; }
+.cfg-design[aria-checked="true"] .cfg-ico { stroke-width: 2.2; }
+.cfg-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-bottom: 0; }
+.cfg-actions button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 42px; padding: 0 10px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--white); color: var(--ink); cursor: pointer;
+  font: 700 13px/1 var(--font);
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.cfg-actions button:hover { border-color: var(--ink); }
+.cfg-actions button:disabled { opacity: .35; cursor: not-allowed; border-color: var(--line); }
+.cfg-actions button.is-danger:hover { background: #fbeaea; border-color: #9a1b1b; color: #9a1b1b; }
+.cfg-actions svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.cfg-link { margin-top: 20px; padding: 0; border: 0; background: none; font: 700 13px/1 var(--font); color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.cfg-link:hover { color: var(--ink); }
+
+.cfg :focus-visible, .cfg-summary :focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; box-shadow: 0 0 0 5px var(--ink); }
+
+/* -------------------------------------------------------------- summary -- */
+.cfg-summary {
+  width: min(640px, calc(100vw - 32px));
+  max-height: calc(100svh - 48px);
+  padding: 0; border: 0; border-radius: 14px;
+  box-shadow: 0 24px 70px rgba(0,0,0,.3);
+  font-family: var(--font); color: var(--ink);
+}
+.cfg-summary::backdrop { background: rgba(10,10,10,.55); backdrop-filter: blur(3px); }
+.cfg-summary[open] { animation: cfg-rise .35s var(--ease-out); }
+@keyframes cfg-rise { from { opacity: 0; transform: translateY(14px) scale(.985); } }
+.cfg-sum-in { padding: 26px 28px 24px; }
+.cfg-sum-head { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
+.cfg-sum-head h2 { margin: 0; font-size: 26px; font-weight: 900; letter-spacing: -0.01em; }
+.cfg-sum-size { margin: 4px 0 0; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.cfg-x { width: 40px; height: 40px; border: 0; border-radius: 999px; background: #f2f1ed; cursor: pointer; display: grid; place-items: center; }
+.cfg-x:hover { background: #e7e5df; }
+.cfg-x svg { width: 18px; height: 18px; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+.cfg-sum-table { width: 100%; border-collapse: collapse; margin: 18px 0 0; font-size: 14px; }
+.cfg-sum-table th { text-align: left; font-size: 12px; color: var(--muted); font-weight: 700; padding: 0 8px 8px; border-bottom: 1px solid var(--line); }
+.cfg-sum-table td { padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; line-height: 1.35; }
+.cfg-sum-table td span { color: var(--muted); font-size: 13px; }
+.cfg-sum-table .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cfg-sum-sub td { color: var(--muted); }
+.cfg-sum-foot { display: flex; align-items: baseline; justify-content: space-between; margin-top: 16px; }
+.cfg-sum-foot strong { font-size: 28px; font-weight: 900; font-variant-numeric: tabular-nums; }
+.cfg-sum-note { margin: 4px 0 0; font-size: 12px; color: var(--muted); }
+.cfg-sum-cta {
+  margin-top: 22px; padding: 18px 20px; border-radius: 12px;
+  background: var(--ink); color: var(--white);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.cfg-sum-cta p { margin: 0; font-weight: 700; max-width: 34ch; }
+.cfg-sum-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.cfg-sum-cta a, .cfg-sum-cta button {
+  display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px;
+  border-radius: 999px; font: 700 14px/1 var(--font); text-decoration: none; cursor: pointer; border: 0;
+}
+.cfg-sum-cta a { background: var(--yellow); color: var(--ink); }
+.cfg-sum-cta a:hover { background: var(--white); }
+.cfg-sum-cta button { background: #262626; color: var(--white); }
+.cfg-sum-cta button:hover { background: #333; }
+.cfg-sum-cta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------------------------------------------------------------- intro -- */
+.cfg-about { padding-block: clamp(56px, 7vw, 96px); }
+.cfg-about .wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.cfg-about h2 { margin: 0; font-size: var(--step-h2); font-weight: 900; line-height: 1.05; letter-spacing: -0.015em; text-wrap: balance; }
+.cfg-about p { margin: 0 0 16px; font-size: var(--step-body); line-height: 1.6; color: var(--gray-text); max-width: 60ch; }
+.cfg-about ul { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.cfg-about li { padding-left: 20px; position: relative; font-size: 16px; line-height: 1.5; }
+.cfg-about li::before { content: ''; position: absolute; left: 0; top: .6em; width: 10px; height: 3px; background: var(--ink); box-shadow: 0 3px 0 var(--yellow); }
+
+/* ----------------------------------------------------------- responsive -- */
+@media (max-width: 900px) {
+  .cfg { grid-template-columns: 1fr; grid-template-rows: 58svh auto; height: auto; min-height: 0; }
+  .cfg-panel { border-left: 0; border-top: 1px solid var(--line); }
+  .cfg-panel-body { overflow: visible; }
+  .cfg-tool .cfg-tool-text { display: none; }
+  .cfg-tool { width: 40px; padding: 0; justify-content: center; }
+  .cfg-tools--view { left: 10px; bottom: 10px; }
+  .cfg-tools--history { right: 10px; bottom: 10px; }
+  .cfg-about .wrap { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .cfg-panel-top, .cfg-panel-body, .cfg-panel-foot { padding-inline: 16px; }
+  .cfg-sum-in { padding: 20px 18px; }
+  .cfg-sum-table td:first-child, .cfg-sum-table th:first-child { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cfg *, .cfg-summary { transition: none !important; animation: none !important; }
+}
+
+/* composition list: wall under the name */
+.cfg-list button > span:nth-of-type(1) { display: grid; gap: 2px; }
+.cfg-list small { font-size: 12px; font-weight: 400; color: var(--muted); }
+.cfg-hint { margin-bottom: 12px; }
