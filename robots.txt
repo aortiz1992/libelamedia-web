@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /propuestas/
 
 Sitemap: https://www.libelamedia.com/sitemap.xml

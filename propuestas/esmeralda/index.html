@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Peluquería Esmeralda — Plasencia</title>
+<meta name="description" content="Peluquería de hombre y mujer en la Plaza de los Pinos, Plasencia. 4,9 sobre 95 reseñas en Google.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf7f2;
+  --paper-2:#f4ece3;
+  --ink:#1a1512;
+  --ink-soft:#5c514a;
+  --terra:#a4503a;
+  --terra-deep:#7d3a28;
+  --line:#e4d8cb;
+  --display:'Fraunces',Georgia,serif;
+  --body:'Inter',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--terra);color:var(--paper)}
+:focus-visible{outline:2.5px solid var(--terra);outline-offset:3px;border-radius:3px}
+img{max-width:100%;display:block}
+.wrap{width:min(100% - 44px,1040px);margin-inline:auto}
+
+/* ---------- aviso de propuesta: esto NO es su web oficial ---------- */
+.propuesta{background:var(--ink);color:#f3ece6;font-size:14px;line-height:1.5;padding:12px 0}
+.propuesta .wrap{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.propuesta b{color:#ffe14d;font-weight:600}
+.propuesta p{max-width:78ch}
+
+/* ---------- cabecera ---------- */
+header{padding:58px 0 0}
+.marca{font-family:var(--display);font-size:clamp(36px,6.8vw,66px);font-weight:600;letter-spacing:-.02em;line-height:1.05}
+.marca em{font-style:italic;color:var(--terra)}
+.bajo{margin-top:16px;font-size:clamp(17px,2.4vw,21px);color:var(--ink-soft);max-width:42ch}
+
+.estrellas{margin-top:26px;display:inline-flex;align-items:center;gap:11px;background:var(--paper-2);
+  border:1px solid var(--line);border-radius:999px;padding:9px 18px 9px 14px}
+.estrellas svg{width:19px;height:19px;flex:none}
+.estrellas strong{font-weight:600;font-variant-numeric:tabular-nums}
+.estrellas span{color:var(--ink-soft);font-size:15px}
+
+.acciones{margin-top:30px;display:flex;gap:13px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:500;font-size:17px;
+  padding:15px 26px;border-radius:999px;text-decoration:none;
+  transition:transform .16s cubic-bezier(.2,.8,.3,1),box-shadow .16s ease,background-color .16s ease}
+.btn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.btn-1{background:var(--terra);color:#fff;box-shadow:0 6px 18px -6px rgba(124,58,40,.55)}
+.btn-1:hover{background:var(--terra-deep);transform:translateY(-2px);box-shadow:0 12px 26px -8px rgba(124,58,40,.6)}
+.btn-2{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn-2:hover{border-color:var(--ink);transform:translateY(-2px)}
+
+/* ---------- franja de oficio ---------- */
+.franja{margin-top:62px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,var(--paper-2),transparent)}
+.franja .wrap{padding:30px 0;display:flex;gap:34px;flex-wrap:wrap;justify-content:space-between}
+.dato{display:flex;gap:13px;align-items:flex-start}
+.dato svg{width:22px;height:22px;flex:none;margin-top:3px;fill:none;stroke:var(--terra);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.dato dt{font-weight:600;font-size:16px}
+.dato dd{color:var(--ink-soft);font-size:15px}
+
+/* ---------- secciones ---------- */
+section{padding:72px 0}
+h2{font-family:var(--display);font-size:clamp(28px,4.4vw,40px);font-weight:600;letter-spacing:-.015em;line-height:1.12;text-wrap:balance}
+.intro{margin-top:16px;color:var(--ink-soft);max-width:62ch}
+
+.servicios{margin-top:40px;display:grid;gap:0;border-top:1px solid var(--line)}
+.servicio{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:baseline;
+  padding:21px 4px;border-bottom:1px solid var(--line)}
+.servicio h3{font-size:19px;font-weight:600;letter-spacing:-.01em}
+.servicio p{color:var(--ink-soft);font-size:15.5px;margin-top:3px;max-width:58ch}
+.servicio em{font-style:normal;color:var(--ink);font-size:18px;font-weight:600;white-space:nowrap;
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.servicio em span{color:var(--ink-soft);font-size:14px;font-weight:400;letter-spacing:0}
+
+
+/* ---------- instagram: el único bloque oscuro, para que destaque ---------- */
+.insta-sec{padding-top:8px}
+.insta{background:var(--ink);color:#f6efe9;border-radius:22px;padding:clamp(30px,5vw,52px);
+  display:grid;gap:30px;align-items:center;box-shadow:0 22px 50px -32px rgba(26,21,18,.9)}
+@media (min-width:780px){.insta{grid-template-columns:minmax(0,1fr) auto;gap:48px}}
+.insta h2{color:#fff}
+.insta p{margin-top:12px;color:#c9bbb1;max-width:48ch;font-size:16.5px}
+.btn-insta{margin-top:26px;background:#f6efe9;color:var(--ink);font-weight:600;
+  box-shadow:0 8px 22px -10px rgba(0,0,0,.7)}
+.btn-insta:hover{background:#fff;transform:translateY(-2px)}
+.cifras{display:flex;gap:34px}
+@media (min-width:780px){.cifras{flex-direction:column;gap:22px;text-align:right}}
+.cifras dt{font-family:var(--display);font-size:clamp(30px,5vw,40px);font-weight:600;
+  color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.cifras dd{color:#b8a89d;font-size:14.5px;margin-top:5px;letter-spacing:.02em}
+
+/* ---------- pedir cita ---------- */
+.cita{display:grid;gap:40px;grid-template-columns:1fr}
+@media (min-width:880px){.cita{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:56px;align-items:start}}
+.cita-sub{color:var(--ink-soft);font-size:15.5px;margin-top:18px;max-width:34ch}
+.form{background:var(--paper-2);border:1px solid var(--line);border-radius:20px;
+  padding:clamp(26px,4vw,38px);box-shadow:0 14px 34px -26px rgba(26,21,18,.45)}
+.campos{display:grid;gap:17px;grid-template-columns:1fr}
+@media (min-width:560px){.campos{grid-template-columns:1fr 1fr}}
+.campo{display:grid;gap:7px;min-width:0}
+.campo.ancho{grid-column:1 / -1}
+.campo label{font-size:14.5px;font-weight:500;color:var(--ink-soft)}
+.campo input,.campo select,.campo textarea{font:inherit;font-size:16.5px;color:var(--ink);
+  background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;
+  width:100%;transition:border-color .16s ease}
+.campo input:hover,.campo select:hover,.campo textarea:hover{border-color:#cdbcab}
+.campo textarea{resize:vertical;min-height:94px}
+.form .btn{margin-top:24px;border:0;cursor:pointer;font-family:inherit}
+.form .nota{margin-top:15px;font-size:14.5px;color:var(--ink-soft)}
+
+/* ---------- horario ---------- */
+.horario{background:var(--paper-2);border-radius:20px;padding:clamp(28px,5vw,46px);border:1px solid var(--line)}
+.horario h2{margin-bottom:10px}
+.tabla-horario{width:100%;margin-top:26px;border-collapse:collapse}
+.tabla-horario th,.tabla-horario td{padding:14px 2px;border-bottom:1px solid var(--line);font-size:17px}
+.tabla-horario th{text-align:left;font-weight:500;color:var(--ink)}
+.tabla-horario td{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.tabla-horario tr:last-child th,.tabla-horario tr:last-child td{border-bottom:0}
+.tabla-horario .cerrado{font-weight:400;color:var(--ink-soft)}
+
+/* ---------- visita ---------- */
+.visita{display:grid;gap:34px;grid-template-columns:1fr}
+@media (min-width:860px){.visita{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:start}}
+.llegar{background:var(--paper-2);border:1px solid var(--line);border-radius:20px;
+  padding:clamp(26px,4vw,38px);box-shadow:0 14px 34px -26px rgba(26,21,18,.45)}
+.llegar h3{font-family:var(--display);font-size:24px;font-weight:600;letter-spacing:-.01em}
+.llegar p{color:var(--ink-soft);margin-top:8px;font-size:16px;max-width:40ch}
+.llegar .btn{margin-top:22px}
+.ref{margin-top:24px;padding-top:22px;border-top:1px solid var(--line);display:grid;gap:12px}
+.ref div{display:flex;gap:11px;align-items:flex-start;font-size:15.5px;color:var(--ink-soft)}
+.ref svg{width:18px;height:18px;flex:none;margin-top:3px;fill:none;stroke:var(--terra);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tel{font-family:var(--display);font-size:clamp(28px,5vw,38px);font-weight:600;color:var(--ink);
+  text-decoration:none;display:inline-block;margin-top:6px;letter-spacing:-.01em}
+.tel:hover{color:var(--terra)}
+address{font-style:normal;color:var(--ink-soft);margin-top:18px;font-size:16.5px;line-height:1.7}
+
+footer{border-top:1px solid var(--line);padding:34px 0 46px;color:var(--ink-soft);font-size:14.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer a{color:var(--ink);text-underline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="propuesta">
+  <div class="wrap">
+    <p><b>Propuesta de LIBELAMEDIA para Peluquería Esmeralda.</b>
+    Esta no es su web oficial. La hemos preparado a partir de información pública para
+    enseñarles cómo podría ser, y el contenido se ajusta a lo que nos digan.</p>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <h1 class="marca">Peluquería<br><em>Esmeralda</em></h1>
+    <p class="bajo">Peluquería de hombre y mujer en la Plaza de los Pinos, en el centro de Plasencia.</p>
+
+    <p class="estrellas">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#e8a33d" d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.11 6.47L12 17.44 6.19 20.5l1.11-6.47-4.7-4.58 6.5-.95z"/></svg>
+      <strong>4,9</strong> <span>sobre 95 reseñas en Google</span>
+    </p>
+
+    <div class="acciones">
+      <a class="btn btn-1" href="tel:+34927411719">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 3.5h3.2l1.6 4-2 1.5a12.5 12.5 0 006.2 6.2l1.5-2 4 1.6v3.2a1.6 1.6 0 01-1.75 1.6C9.6 19.9 4.1 14.4 2.9 5.25A1.6 1.6 0 014.5 3.5z"/></svg>
+        Pedir cita: 927 41 17 19
+      </a>
+      <a class="btn btn-2" href="https://www.instagram.com/salonbarberiaesmeralda/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.1" cy="6.9" r="1.1" fill="currentColor" stroke="none"/></svg>
+        Ver nuestro trabajo
+      </a>
+      <a class="btn btn-2" href="#cita">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v3M17 4v3M3.5 9.5h17M5 6.5h14a1.5 1.5 0 011.5 1.5v10A1.5 1.5 0 0119 19.5H5A1.5 1.5 0 013.5 18V8A1.5 1.5 0 015 6.5z"/></svg>
+        Reservar online
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="franja">
+  <div class="wrap">
+    <dl class="dato">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 10-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      <div><dt>Plaza de los Pinos, 9</dt><dd>10600 Plasencia, Cáceres</dd></div>
+    </dl>
+    <dl class="dato">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 3.5h3.2l1.6 4-2 1.5a12.5 12.5 0 006.2 6.2l1.5-2 4 1.6v3.2a1.6 1.6 0 01-1.75 1.6C9.6 19.9 4.1 14.4 2.9 5.25A1.6 1.6 0 014.5 3.5z"/></svg>
+      <div><dt>927 41 17 19</dt><dd>Cita previa por teléfono</dd></div>
+    </dl>
+    <dl class="dato">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v3M17 4v3M3.5 9.5h17M5 6.5h14a1.5 1.5 0 011.5 1.5v10A1.5 1.5 0 0119 19.5H5A1.5 1.5 0 013.5 18V8A1.5 1.5 0 015 6.5z"/></svg>
+      <div><dt>Martes a sábado</dt><dd>Tardes de 14:00 a 20:00</dd></div>
+    </dl>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Lo que hacemos</h2>
+    <p class="intro">Corte, color y peinado para toda la familia, con el trato de siempre.
+      Muchos de nuestros clientes llevan viniendo desde pequeños.</p>
+
+    <div class="servicios">
+      <div class="servicio">
+        <div><h3>Corte de caballero</h3><p>Corte clásico o moderno, arreglo de barba y perfilado.</p></div>
+        <em>12 €</em>
+      </div>
+      <div class="servicio">
+        <div><h3>Corte de señora</h3><p>Corte, lavado y peinado adaptado a tu tipo de pelo.</p></div>
+        <em><span>desde</span> 16 €</em>
+      </div>
+      <div class="servicio">
+        <div><h3>Color y mechas</h3><p>Tinte, mechas y matices, con asesoramiento antes de empezar.</p></div>
+        <em><span>desde</span> 35 €</em>
+      </div>
+      <div class="servicio">
+        <div><h3>Peinados y recogidos</h3><p>Para bodas, comuniones y cualquier día que lo merezca.</p></div>
+        <em><span>desde</span> 25 €</em>
+      </div>
+      <div class="servicio">
+        <div><h3>Tratamientos</h3><p>Hidratación y cuidado del cabello según lo que necesite.</p></div>
+        <em><span>desde</span> 15 €</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="insta-sec">
+  <div class="wrap">
+    <div class="insta">
+      <div>
+        <h2>Cada semana subimos lo que hacemos</h2>
+        <p>Cortes, color, recogidos y el día a día del salón. Si quieres ver cómo
+           trabajamos antes de pedir cita, está todo ahí.</p>
+        <a class="btn btn-insta" href="https://www.instagram.com/salonbarberiaesmeralda/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.1" cy="6.9" r="1.1" fill="currentColor" stroke="none"/></svg>
+          @salonbarberiaesmeralda
+        </a>
+      </div>
+      <dl class="cifras">
+        <div><dt>4.495</dt><dd>publicaciones</dd></div>
+        <div><dt>1.407</dt><dd>seguidores</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="cita">
+  <div class="wrap">
+    <div class="cita">
+      <div>
+        <h2>Pedir cita</h2>
+        <p class="intro">Llámanos y te damos hora en el momento, o déjanos tus datos
+          y te llamamos nosotros para confirmarla.</p>
+        <a class="tel" href="tel:+34927411719">927 41 17 19</a>
+        <p class="cita-sub">Martes a viernes de 14:00 a 20:00. Sábado de 12:00 a 17:00.</p>
+      </div>
+
+      <form class="form" id="form-cita" data-correo="info@libelamedia.com">
+        <div class="campos">
+          <div class="campo">
+            <label for="f-nombre">Nombre</label>
+            <input id="f-nombre" name="nombre" type="text" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="f-tel">Teléfono</label>
+            <input id="f-tel" name="telefono" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="campo">
+            <label for="f-servicio">Qué quieres hacerte</label>
+            <select id="f-servicio" name="servicio">
+              <option>Corte de caballero</option>
+              <option>Corte de señora</option>
+              <option>Color y mechas</option>
+              <option>Peinados y recogidos</option>
+              <option>Tratamientos</option>
+              <option>Todavía no lo sé</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="f-cuando">Cuándo te viene bien</label>
+            <input id="f-cuando" name="cuando" type="text" placeholder="Jueves por la tarde, por ejemplo">
+          </div>
+          <div class="campo ancho">
+            <label for="f-nota">Algo que debamos saber <span style="font-weight:400">(opcional)</span></label>
+            <textarea id="f-nota" name="comentario"></textarea>
+          </div>
+        </div>
+        <button class="btn btn-1" type="submit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v3M17 4v3M3.5 9.5h17M5 6.5h14a1.5 1.5 0 011.5 1.5v10A1.5 1.5 0 0119 19.5H5A1.5 1.5 0 013.5 18V8A1.5 1.5 0 015 6.5z"/><path d="M9.5 14.2l1.8 1.8 3.4-3.6"/></svg>
+          Pedir la cita
+        </button>
+        <p class="nota">Te llamamos para confirmar el día y la hora.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;padding-bottom:0">
+  <div class="wrap">
+    <div class="horario">
+      <h2>Horario</h2>
+      <p class="intro">Trabajamos con cita previa. Llámanos y te damos hora.</p>
+      <table class="tabla-horario">
+        <tbody>
+          <tr><th scope="row">Martes a viernes</th><td>14:00 – 20:00</td></tr>
+          <tr><th scope="row">Sábado</th><td>12:00 – 17:00</td></tr>
+          <tr><th scope="row">Domingo y lunes</th><td class="cerrado">Cerrado</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="donde">
+  <div class="wrap">
+    <div class="visita">
+      <div>
+        <h2>Dónde estamos</h2>
+        <p class="intro">En plena Plaza de los Pinos, en el centro de Plasencia.</p>
+        <a class="tel" href="tel:+34927411719">927 41 17 19</a>
+        <address>
+          Plaza de los Pinos, 9<br>
+          10600 Plasencia (Cáceres)
+        </address>
+      </div>
+      <div class="llegar">
+        <h3>Te abrimos la ruta</h3>
+        <p>Pulsa y se abre directamente en el mapa de tu móvil, con la ruta desde donde estés.</p>
+        <a class="btn btn-1" href="https://www.google.com/maps/dir/?api=1&amp;destination=Peluquer%C3%ADa%20Esmeralda%2C%20Plaza%20de%20los%20Pinos%209%2C%2010600%20Plasencia"
+           target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 10-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          Cómo llegar
+        </a>
+        <div class="ref">
+          <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18M6 20V9l6-4.5L18 9v11"/><path d="M10 20v-5h4v5"/></svg>
+            <span>En la propia Plaza de los Pinos, junto al parque.</span></div>
+          <div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.6V12l2.8 1.8"/></svg>
+            <span>A diez minutos andando desde el centro de Plasencia.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Peluquería Esmeralda · Plasencia (Cáceres)</span>
+    <span>Diseño y desarrollo: <a href="https://www.libelamedia.com">LIBELAMEDIA</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var f = document.getElementById('form-cita');
+  if (!f) return;
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = new FormData(f), g = function (k) { return (d.get(k) || '').toString().trim(); };
+    var cuerpo = [
+      'Nombre: ' + g('nombre'),
+      'Teléfono: ' + g('telefono'),
+      'Servicio: ' + g('servicio'),
+      'Cuándo le viene bien: ' + (g('cuando') || '—'),
+      '',
+      g('comentario')
+    ].join('\n');
+    window.location.href = 'mailto:' + f.dataset.correo +
+      '?subject=' + encodeURIComponent('Cita — ' + g('nombre')) +
+      '&body=' + encodeURIComponent(cuerpo);
+  });
+})();
+</script>
+
+</body>
+</html>
