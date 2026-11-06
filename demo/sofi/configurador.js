@@ -60,6 +60,16 @@ const estado = {
   grabando: false,
   rotulos: false,
   giro: false,
+  // `entorno` FALTABA aqui, y costo caro. Al arrancar valia undefined, asi que
+  // cuando peces.glb terminaba de cargar, montarBanco hacia
+  // `banco.grupo.visible = estado.entorno` y dejaba `visible` en undefined.
+  //
+  // Three.js dibuja igual —comprueba `=== false`, no la veracidad— asi que los
+  // peces SE VEIAN. Pero el bucle hace `if (banco && banco.grupo.visible)`, y
+  // undefined es falso: nadie los actualizaba nunca. Peces visibles y
+  // congelados en el origen, y encima de forma intermitente, porque dependia de
+  // si el .glb cargaba antes o despues del primer aplicarEntorno().
+  entorno: true,
   malla: false,
   reproduciendo: true,
 };
@@ -955,7 +965,10 @@ function montarBanco(gltf) {
     alMaterial: (m) => oceano.aplicarCausticas(m, 0.2, 240, 0.08),
   });
   if (!banco) return;
-  banco.grupo.visible = estado.entorno;
+  // De `entornoA.valor`, no de `estado.entorno`: la animacion del entorno es la
+  // fuente autentica —es lo que mira avanzarEntorno— y ademas es un numero, no
+  // una bandera que pueda llegar sin definir.
+  banco.grupo.visible = entornoA.valor > 0.001;
 }
 
 function montarEscenario(gltf) {
@@ -2370,6 +2383,7 @@ function abrirRodaje() {
     get lienzo() { return lienzo; },
     get nadador() { return nadador; },
     get estado() { return estado; },
+    get banco() { return banco; },
     get modelo() { return modelo; },
     get marcha() { return nado ? nado.marcha : null; },
 
