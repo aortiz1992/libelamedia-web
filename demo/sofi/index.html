@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!-- Tema oscuro de salida: el visor es agua profunda y los paneles claros
+     deslumbran al lado. En claro sigue funcionando, pero no es el de casa. -->
+<html lang="en" data-theme="dark" data-vista="simple">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SoFi</title>
+<meta name="description" content="3D configurator for the SoFi soft robotic fish: assemblies, exploded views, viewpoints and swimming.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="configurador.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ───────────── cabecera ───────────── -->
+  <header class="barra">
+    <div class="marca">
+      <svg viewBox="0 0 40 24" aria-hidden="true"><use href="#pez"/></svg>
+      <span>SoFi</span>
+    </div>
+    <div class="titulo">
+      <p class="sobretitulo">Soft robotic fish · exploration unit</p>
+      <h1>SoFi <i>/</i></h1>
+      <p class="subtitulo" id="sub">Assembly simulator</p>
+    </div>
+
+    <div class="carga">
+      <div class="carga-cab"><span>Tail beat</span><b id="carga-pct">0 %</b></div>
+      <div class="barras" id="carga-barras" aria-hidden="true"></div>
+      <div class="carga-pie"><span>Idle</span><span>Cruise</span><span>Max</span></div>
+    </div>
+
+    <dl class="meta">
+      <div><dt>Model</dt><dd id="m-id">SOFI-V5</dd></div>
+      <div><dt>Cycle</dt><dd id="m-t">0.00 s</dd></div>
+      <div><dt>Status</dt><dd class="estado"><i id="m-led"></i><span id="m-estado">Swim</span></dd></div>
+      <div><dt>Speed</dt><dd id="m-vel">—</dd></div>
+    </dl>
+
+    <!-- El interruptor entre las dos vistas. Va en la cabecera y no escondido
+         en el mando: es la decisión más importante que toma quien llega. -->
+    <button class="cambio-vista" id="cambio-vista" aria-pressed="false">
+      <span class="cv-a">Technical data</span>
+      <span class="cv-b">Simple view</span>
+    </button>
+  </header>
+
+  <!-- ───────────── columna izquierda ───────────── -->
+  <aside class="col izq">
+    <section class="panel">
+      <h2>Tail beat <b>01</b></h2>
+      <div class="cifra"><strong id="hz">0.00</strong><em>Hz</em><span id="amp">0°</span></div>
+      <p class="pie-cifra"><span>Cycle frequency</span><span>Tip deflection</span></p>
+      <ul class="medidores" id="huesos"></ul>
+      <!-- Lo que de verdad dice cómo nada: no los grados de cada hueso, sino lo
+           que sale de combinarlos con la velocidad. -->
+      <dl class="filas" id="nado-datos"></dl>
+      <p class="nota"><span>Chain</span><b id="n-huesos">—</b><span>Phase</span><b>progressive</b></p>
+    </section>
+
+    <section class="panel">
+      <h2>Hydrostatics <b>02</b></h2>
+      <div class="cifra"><strong id="presion">1.41</strong><em>bar</em><span id="prof-cifra">4.0 m</span></div>
+      <p class="pie-cifra"><span>Absolute pressure</span><span>Depth</span></p>
+      <dl class="filas" id="hidro-datos"></dl>
+      <p class="nota"><span>Hull</span><b id="vol-casco">—</b><span>Wetted</span><b id="sup-casco">—</b></p>
+    </section>
+
+    <!-- Lo que le falta a un aparato que va suelto por el arrecife: cuánto le
+         queda de batería y si sigue oyendo al buzo. Ocupa el sitio que dejó la
+         línea de tiempo, que contaba el fotograma de una animación — un dato
+         del fichero, no del aparato. -->
+    <section class="panel crece">
+      <h2>Power and link <b>06</b></h2>
+      <div class="cifra"><strong id="bat-pct">100</strong><em>%</em><span id="bat-resto">40:00</span></div>
+      <p class="pie-cifra"><span>LiPo battery</span><span>Endurance left</span></p>
+      <div class="barras" id="bat-barras" aria-hidden="true"></div>
+      <dl class="filas" id="energia-datos"></dl>
+      <p class="nota"><span>Link</span><b id="enlace-estado">—</b><span>Water</span><b id="agua-temp">—</b></p>
+    </section>
+
+  </aside>
+
+  <!-- ───────────── escena ───────────── -->
+  <main class="escena">
+    <canvas id="lienzo"></canvas>
+    <div class="rotulos" id="rotulos"></div>
+
+    <!-- Los rayos X viven aparte del mando, a la izquierda: no son un ajuste
+         entre otros, son la otra forma de mirar el bicho. Era un deslizador de
+         0 a 100 % y nadie necesitaba el 37 %: lo que se quiere es verlo por
+         dentro o no verlo. -->
+    <button class="rayosx" id="rayosx" aria-pressed="false">
+      <span class="rayosx-icono" aria-hidden="true"></span>
+      <span>X-ray</span>
+    </button>
+
+
+    <!-- El mando vive sobre la escena, no en una columna: así cabe todo y, al
+         grabar sólo el visor, los controles siguen saliendo. -->
+    <div class="mando" id="mando">
+      <div class="modos-barra" id="modos-barra"></div>
+      <div class="extras" id="modos"></div>
+    </div>
+
+    <!-- Se va al primer clic. Quien llega desde el vídeo no sabe que los
+         números de la escena se pulsan, y nada se lo decía. -->
+    <div class="pista" id="pista">
+      <p>Tap a numbered point to open its card</p>
+    </div>
+    <!-- Avisos de estudio: qué formato se ha puesto, cómo salir de grabación.
+         Hace falta porque grabando desaparece el mando y si no, no hay forma de
+         saber qué teclas quedan. -->
+    <p class="aviso-estudio" id="aviso-estudio" aria-live="polite"></p>
+    <p class="marca-escena" id="vista-activa">Hero</p>
+    <!-- Vacío a propósito: lo escribe aislar() al elegir un punto, y el guión de
+         la demo. Tenía «Nado» puesto a mano y, como nada lo borra al arrancar, se
+         quedaba clavado en la esquina de todos los fotogramas hasta el primer clic. -->
+    <p class="estado-grande" id="estado-grande"></p>
+
+    <!-- Ficha sobre la escena. En la vista simple no hay columnas, así que al
+         pulsar un punto no se contaba nada: se aislaba la pieza y ya. Aquí va
+         qué es, para qué sirve y cómo volver. -->
+    <aside class="tarjeta" id="tarjeta" hidden>
+      <p class="tarjeta-num" id="tarjeta-num">01</p>
+      <h2 class="tarjeta-titulo" id="tarjeta-titulo">—</h2>
+      <p class="tarjeta-texto" id="tarjeta-texto"></p>
+      <dl class="tarjeta-cifras" id="tarjeta-cifras"></dl>
+      <div class="tarjeta-pie">
+        <button class="tarjeta-volver" id="tarjeta-volver">← Back</button>
+        <button class="tarjeta-accion" id="tarjeta-accion" hidden></button>
+      </div>
+    </aside>
+    <div class="cargando" id="cargando"><span></span><p>Loading model…</p></div>
+    <!-- Rótulo de la pasada guiada. Vive dentro de la escena para que, al
+         grabar sólo el visor, el texto siga saliendo. -->
+    <div class="cine" id="cine">
+      <p class="cine-titulo" id="cine-titulo"></p>
+      <p class="cine-pie" id="cine-pie"></p>
+    </div>
+  </main>
+
+  <!-- ───────────── columna derecha ───────────── -->
+  <aside class="col der">
+    <section class="panel">
+      <h2>Specifications <b>03</b></h2>
+      <dl class="filas" id="cotas"></dl>
+    </section>
+
+    <section class="panel">
+      <h2>Servos <b>04</b></h2>
+      <ul class="medidores" id="servos"></ul>
+      <p class="nota nota-larga" id="servos-nota"></p>
+    </section>
+
+    <!-- Ficha del punto seleccionado. Antes había dos paneles — Vista y
+         Conjuntos — que decían lo mismo que ahora dicen los marcadores sobre el
+         propio modelo. Aquí queda sólo lo que el marcador no cabe: el detalle. -->
+    <section class="panel crece" id="ficha">
+      <h2>Point of interest <b>05</b></h2>
+      <div class="ficha-vacia" id="ficha-vacia">
+        <p>Tap a numbered point on the model.</p>
+      </div>
+      <div class="ficha-cuerpo" id="ficha-cuerpo" hidden>
+        <p class="ficha-num" id="ficha-num">01</p>
+        <h3 id="ficha-titulo">—</h3>
+        <p class="ficha-sub" id="ficha-sub">—</p>
+        <p class="ficha-texto" id="ficha-texto"></p>
+        <dl class="filas" id="ficha-datos"></dl>
+        <div class="fichas" id="ficha-acciones"></div>
+        <button class="ficha-cerrar" id="ficha-cerrar">← Back to the whole fish</button>
+      </div>
+    </section>
+  </aside>
+
+
+  <p class="pieza-pie">
+    <span id="pie-izq">Independent reconstruction · technical demonstration</span>
+    <span id="pie-corales">Corals: <a href="https://sketchfab.com/3d-models/soft-coral-set-256355f15fcb4095af17b75ae572bff0" target="_blank" rel="noopener">Soft Coral Set</a> by <a href="https://sketchfab.com/Kanna-nakajima" target="_blank" rel="noopener">Kanna-Nakajima</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> · Fish: <a href="https://sketchfab.com/3d-models/lowpoly-fish-ad87e55ef338422c816dee9b16b21b6c" target="_blank" rel="noopener">Lowpoly fish</a> by <a href="https://sketchfab.com/AspectStudio" target="_blank" rel="noopener">AspectStudios</a>, CC BY 4.0</span>
+    <span id="pie-der">LIBELA MEDIA</span>
+  </p>
+</div>
+
+<!-- iconos -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="pez" viewBox="0 0 40 24"><path d="M2 12c6-8 16-9 22-5 2-1.5 5-3 8-3-1 2-1.5 4-1 5.5.6 1.6.6 3.4 0 5-0.5 1.5 0 3.5 1 5.5-3 0-6-1.5-8-3C18 21 8 20 2 12Z" fill="currentColor"/><circle cx="26" cy="10" r="1.4" fill="#fff"/></symbol>
+</svg>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+<script type="module" src="configurador.js"></script>
+</body>
+</html>

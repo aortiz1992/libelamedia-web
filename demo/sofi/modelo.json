@@ -1,0 +1,4945 @@
+{
+ "nombre": "SoFi",
+ "titulo": "SoFi",
+ "subtitulo": "Soft robotic fish / assembly simulator",
+ "origen": "Independently reconstructed from the robot published by MIT CSAIL. Technical demonstration; not an original design, and it uses no MIT photographs.",
+ "unidades": "mm",
+ "cota_mm": {
+  "largo": 364.1,
+  "ancho": 178.3,
+  "alto": 145.0
+ },
+ "cota_publicada_mm": {
+  "largo": 339.0,
+  "cabeza": 146.0,
+  "cola": 159.0,
+  "alto_cuerpo": 51.0
+ },
+ "centro": [
+  0.0,
+  0.06567,
+  0.008
+ ],
+ "radio": 0.182,
+ "radio_esfera": 0.2153,
+ "totales": {
+  "mallas": 342,
+  "vertices": 54683,
+  "triangulos": 103934,
+  "materiales": 50
+ },
+ "animacion": {
+  "accion": "ARM_SoFiAction",
+  "fps": 30,
+  "fotogramas": 54,
+  "duracion_s": 1.8,
+  "frecuencia_hz": 0.556
+ },
+ "hidro": {
+  "volumen_l": 1.031,
+  "superficie_cm2": 712.6,
+  "densidad_kg_m3": 1025.0,
+  "viscosidad_cinematica": 1.05e-06,
+  "gravedad": 9.81,
+  "presion_atm_bar": 1.013
+ },
+ "conjuntos": [
+  {
+   "id": "optica",
+   "titulo": "Recording camera",
+   "subtitulo": "Dome · three elements · iris · seals · sensor",
+   "descripcion": "Sealed optics in the nose: a pressure dome, a three-element train with its iris and the sensor at the back, all behind two O-rings. This is how the fish sees, and the reason it exists: getting close to wildlife that flees any conventional submersible.",
+   "piezas": [
+    "CAM_Barrilete",
+    "CAM_Bisel",
+    "CAM_Diafragma",
+    "CAM_Domo",
+    "CAM_Domo_Aro",
+    "CAM_Elemento_1",
+    "CAM_Elemento_2",
+    "CAM_Elemento_3",
+    "CAM_Junta_Frontal",
+    "CAM_Junta_Trasera",
+    "CAM_Lente",
+    "CAM_Modulo",
+    "CAM_Reten_Frontal",
+    "CAM_Reten_Trasero",
+    "CAM_Sensor",
+    "CAM_Separador_1",
+    "CAM_Tornillos_Diafragma",
+    "CAM_Tornillos_Frontal",
+    "Camera"
+   ],
+   "n_piezas": 19,
+   "vertices": 2618,
+   "triangulos": 5088,
+   "cota_mm": {
+    "largo": 9.6,
+    "ancho": 15.6,
+    "alto": 15.6
+   },
+   "centro": [
+    0.0,
+    0.05143,
+    0.18525
+   ],
+   "ancla": [
+    0.0,
+    -0.00057,
+    0.18525
+   ],
+   "materiales": [
+    "MAT_Acero",
+    "MAT_OPT_Anillo",
+    "MAT_OPT_Cuerpo",
+    "MAT_OPT_Junta",
+    "MAT_OPT_Laton",
+    "MAT_OPT_Tornillo",
+    "MAT_OPT_Vidrio",
+    "MAT_Optica",
+    "MAT_PCB",
+    "MAT_Plastico",
+    "MAT_PortaOptica"
+   ],
+   "punto": true
+  },
+  {
+   "id": "cabeza",
+   "titulo": "Electronics",
+   "subtitulo": "Boards · LiPo batteries · wiring",
+   "descripcion": "Everything that has to stay dry: control boards, microcontroller, LiPo batteries and the wiring that runs back to the tail. It lives in the rigid section because that is the only part that does not deform while swimming.",
+   "piezas": [
+    "BézierCurve",
+    "BézierCurve.001",
+    "CAM_Latiguillo",
+    "CBL_Potencia_Negro",
+    "CBL_Potencia_Rojo",
+    "CBL_Senal_Bomba",
+    "Cube",
+    "Cube.001",
+    "Cube.002",
+    "Cylinder.001",
+    "Cylinder.005",
+    "ELE_Bateria_Etiqueta",
+    "ELE_Bateria_LiPo",
+    "ELE_Chip_01",
+    "ELE_Chip_01.001",
+    "ELE_Chip_02",
+    "ELE_Costado_1",
+    "ELE_Costado_2",
+    "ELE_Cuaderna_1",
+    "ELE_Cuna",
+    "ELE_Liston_1",
+    "ELE_Liston_2",
+    "ELE_Liston_3",
+    "ELE_Liston_4",
+    "ELE_Marca_INT_Placa_mbed",
+    "ELE_Marca_PCB_Principal",
+    "ELE_Pasivo_03",
+    "ELE_Pasivo_04",
+    "ELE_Pasivo_04.001",
+    "ELE_Pasivo_05",
+    "ELE_Pasivo_05.001",
+    "ELE_Pasivo_06",
+    "ELE_Pasivo_06.001",
+    "ELE_Pasivo_07",
+    "ELE_Pasivo_07.001",
+    "ELE_Pasivo_08",
+    "ELE_Pasivo_08.001",
+    "ELE_Pasivo_09",
+    "ELE_Pasivo_09.001",
+    "ELE_Pasivo_10",
+    "ELE_Pasivo_10.001",
+    "ELE_Pasivo_11",
+    "ELE_Pasivo_11.001",
+    "ELE_Pasivo_12",
+    "ELE_Pasivo_12.001",
+    "ELE_Pasivo_13",
+    "ELE_Pasivo_13.001",
+    "ELE_Pasivo_14",
+    "ELE_Pasivo_14.001",
+    "ELE_Pasivo_15",
+    "ELE_Pasivo_15.001",
+    "ELE_Pasivo_16",
+    "ELE_Pasivo_17",
+    "ELE_Pasivo_18",
+    "ELE_Pasivo_18.001",
+    "ELE_Pasivo_20",
+    "ELE_Pasivo_21",
+    "ELE_Pasivo_25",
+    "ELE_Pasivo_28",
+    "ELE_Pat_01_0_-1",
+    "ELE_Pat_01_0_-1.001",
+    "ELE_Pat_01_0_1",
+    "ELE_Pat_01_0_1.001",
+    "ELE_Pat_01_1_-1",
+    "ELE_Pat_01_1_-1.001",
+    "ELE_Pat_01_1_1",
+    "ELE_Pat_01_1_1.001",
+    "ELE_Pat_01_2_-1",
+    "ELE_Pat_01_2_-1.001",
+    "ELE_Pat_01_2_1",
+    "ELE_Pat_01_2_1.001",
+    "ELE_Pat_01_3_-1",
+    "ELE_Pat_01_3_-1.001",
+    "ELE_Pat_01_3_1",
+    "ELE_Pat_01_3_1.001",
+    "ELE_Pat_01_4_-1",
+    "ELE_Pat_01_4_1",
+    "ELE_Pat_02_0_-1",
+    "ELE_Pat_02_0_1",
+    "ELE_Pat_02_1_-1",
+    "ELE_Pat_02_1_1",
+    "ELE_Pat_02_2_-1",
+    "ELE_Pat_02_2_1",
+    "ELE_Pat_02_3_-1",
+    "ELE_Pat_02_3_1",
+    "ELE_Pinza_1",
+    "ELE_Pinza_2",
+    "ELE_Punto1_01",
+    "ELE_Punto1_01.001",
+    "ELE_Punto1_02",
+    "ELE_Rotulo_INT_Placa_mbed",
+    "ELE_Rotulo_PCB_Principal",
+    "ELE_Serig_01",
+    "ELE_Serig_01.001",
+    "ELE_Serig_02",
+    "ELE_Term_03_-1",
+    "ELE_Term_03_1",
+    "ELE_Term_04_-1",
+    "ELE_Term_04_-1.001",
+    "ELE_Term_04_1",
+    "ELE_Term_04_1.001",
+    "ELE_Term_05_-1",
+    "ELE_Term_05_-1.001",
+    "ELE_Term_05_1",
+    "ELE_Term_05_1.001",
+    "ELE_Term_06_-1",
+    "ELE_Term_06_-1.001",
+    "ELE_Term_06_1",
+    "ELE_Term_06_1.001",
+    "ELE_Term_07_-1",
+    "ELE_Term_07_-1.001",
+    "ELE_Term_07_1",
+    "ELE_Term_07_1.001",
+    "ELE_Term_08_-1",
+    "ELE_Term_08_-1.001",
+    "ELE_Term_08_1",
+    "ELE_Term_08_1.001",
+    "ELE_Term_09_-1",
+    "ELE_Term_09_-1.001",
+    "ELE_Term_09_1",
+    "ELE_Term_09_1.001",
+    "ELE_Term_10_-1",
+    "ELE_Term_10_-1.001",
+    "ELE_Term_10_1",
+    "ELE_Term_10_1.001",
+    "ELE_Term_11_-1",
+    "ELE_Term_11_-1.001",
+    "ELE_Term_11_1",
+    "ELE_Term_11_1.001",
+    "ELE_Term_12_-1",
+    "ELE_Term_12_-1.001",
+    "ELE_Term_12_1",
+    "ELE_Term_12_1.001",
+    "ELE_Term_13_-1",
+    "ELE_Term_13_-1.001",
+    "ELE_Term_13_1",
+    "ELE_Term_13_1.001",
+    "ELE_Term_14_-1",
+    "ELE_Term_14_-1.001",
+    "ELE_Term_14_1",
+    "ELE_Term_14_1.001",
+    "ELE_Term_15_-1",
+    "ELE_Term_15_-1.001",
+    "ELE_Term_15_1",
+    "ELE_Term_15_1.001",
+    "ELE_Term_16_-1",
+    "ELE_Term_16_1",
+    "ELE_Term_17_-1",
+    "ELE_Term_17_1",
+    "ELE_Term_18_-1",
+    "ELE_Term_18_-1.001",
+    "ELE_Term_18_1",
+    "ELE_Term_18_1.001",
+    "ELE_Term_20_-1",
+    "ELE_Term_20_1",
+    "ELE_Term_21_-1",
+    "ELE_Term_21_1",
+    "ELE_Term_25_-1",
+    "ELE_Term_25_1",
+    "ELE_Term_28_-1",
+    "ELE_Term_28_1",
+    "Head.001",
+    "Head.002",
+    "INT_Cinta_Conector_1",
+    "INT_Cinta_Conector_2",
+    "INT_Cinta_Plana",
+    "INT_Hilo_Servo_1",
+    "INT_Hilo_Servo_2",
+    "INT_Hilo_Servo_3",
+    "INT_LiPo_Bolsa_1",
+    "INT_LiPo_Bolsa_2",
+    "INT_Mbed_Boton",
+    "INT_Mbed_Micro",
+    "INT_Mbed_Pin_1",
+    "INT_Mbed_Pin_2",
+    "INT_Mbed_Pin_3",
+    "INT_Mbed_Pin_4",
+    "INT_Mbed_Pin_5",
+    "INT_Mbed_Pin_6",
+    "INT_Mbed_Pin_7",
+    "INT_Mbed_Pin_8",
+    "INT_Placa_mbed",
+    "INT_Resina",
+    "PCB_Bornes",
+    "PCB_Condensador_1",
+    "PCB_Condensador_2",
+    "PCB_Conector",
+    "PCB_Driver",
+    "PCB_Micro",
+    "PCB_Patillas_Driver",
+    "PCB_Patillas_Micro",
+    "PCB_Patillas_Regulador",
+    "PCB_Principal",
+    "PCB_Regulador",
+    "PCB_Tira_Pines",
+    "PCB_Tira_Zocalo"
+   ],
+   "n_piezas": 196,
+   "vertices": 9899,
+   "triangulos": 16881,
+   "cota_mm": {
+    "largo": 128.9,
+    "ancho": 49.8,
+    "alto": 133.9
+   },
+   "centro": [
+    0.0,
+    0.06986,
+    0.11705
+   ],
+   "ancla": [
+    0.0,
+    0.12186,
+    0.11705
+   ],
+   "materiales": [
+    "MAT_Acero",
+    "MAT_Antena",
+    "MAT_CableRojo",
+    "MAT_Casco",
+    "MAT_Casco.001",
+    "MAT_Chip",
+    "MAT_CintaPlana",
+    "MAT_ELE_Ceramico",
+    "MAT_ELE_Cuerpo",
+    "MAT_ELE_Metal",
+    "MAT_ELE_Patilla",
+    "MAT_ELE_Punto",
+    "MAT_ELE_Serigrafia",
+    "MAT_Flex",
+    "MAT_Goma",
+    "MAT_Hilo_Amarillo",
+    "MAT_Hilo_Rojo",
+    "MAT_INT_Placa_mbed_Cobre",
+    "MAT_Impreso",
+    "MAT_Laton",
+    "MAT_LiPo",
+    "MAT_LiPo_Oro",
+    "MAT_PCB_Principal_Cobre",
+    "MAT_Plastico",
+    "MAT_Resina"
+   ],
+   "punto": true
+  },
+  {
+   "id": "pectorales",
+   "titulo": "Pectoral fins",
+   "subtitulo": "Blade · sealed servos · horn · pushrod",
+   "descripcion": "They do not propel: they steer. They deflect together to pitch and in opposite directions to help the turn, like the ailerons of an aircraft. Each one carries its own sealed servo with horn and pushrod.",
+   "piezas": [
+    "Cylinder",
+    "PECT_Horn_D",
+    "PECT_Horn_I",
+    "PECT_Servo_D",
+    "PECT_Servo_I",
+    "PECT_Varilla_D",
+    "PECT_Varilla_I"
+   ],
+   "n_piezas": 7,
+   "vertices": 10869,
+   "triangulos": 21424,
+   "cota_mm": {
+    "largo": 134.7,
+    "ancho": 178.3,
+    "alto": 69.1
+   },
+   "centro": [
+    0.0,
+    0.02773,
+    0.05225
+   ],
+   "ancla": [
+    0.0,
+    -0.05227,
+    0.05225
+   ],
+   "materiales": [
+    "MAT_Acero",
+    "MAT_Aleta",
+    "MAT_Impreso",
+    "MAT_Servo"
+   ],
+   "punto": true
+  },
+  {
+   "id": "hidraulica",
+   "titulo": "Hydraulic system",
+   "subtitulo": "Pump · ballast cylinder · hoses · bulkhead fittings",
+   "descripcion": "Two uses of water in the same machine. The pump sends it to two chambers moulded inside the silicone of the tail: fill the one on one side, that half swells and the soft body curves toward the other. There is no shaft and no connecting rod, which is why it swims without the wake or the noise of a propeller. The ballast cylinder does the other job: a leadscrew drives a piston that changes the displaced volume, and with it the fish rises or sinks without pushing against anything. Changing depth costs energy; holding it does not.",
+   "piezas": [
+    "BCU_Abrazadera",
+    "BCU_Boca",
+    "BCU_Brida_Popa",
+    "BCU_Brida_Proa",
+    "BCU_Cifra_0",
+    "BCU_Cifra_10",
+    "BCU_Cifra_20",
+    "BCU_Cifra_30",
+    "BCU_Cifra_40",
+    "BCU_Husillo",
+    "BCU_Manguito",
+    "BCU_Marca_0",
+    "BCU_Marca_10",
+    "BCU_Marca_20",
+    "BCU_Marca_30",
+    "BCU_Marca_40",
+    "BCU_Motor",
+    "BCU_Motor_Tapa",
+    "BCU_Nervio_0",
+    "BCU_Nervio_1",
+    "BCU_Nervio_2",
+    "BCU_Nervio_3",
+    "BCU_Racor",
+    "BCU_Rosca_0",
+    "BCU_Rosca_1",
+    "BCU_Rosca_2",
+    "BCU_Rosca_3",
+    "BCU_Rotulo",
+    "BCU_Sensor_Base",
+    "BCU_Sensor_Cuerpo",
+    "BCU_Tapa_Popa",
+    "BCU_Tapa_Proa",
+    "BCU_Tornillos_Popa",
+    "BCU_Tornillos_Proa",
+    "BOM_Boca_1",
+    "BOM_Boca_1_Labio",
+    "BOM_Boca_2",
+    "BOM_Boca_2_Labio",
+    "BOM_Boca_3",
+    "BOM_Boca_3_Labio",
+    "BOM_Boca_4",
+    "BOM_Boca_4_Labio",
+    "BOM_Carter",
+    "BOM_Carter_Resalte",
+    "BOM_Engranaje_1",
+    "BOM_Engranaje_2",
+    "BOM_Faldon",
+    "BOM_Junta",
+    "BOM_Oreja_1",
+    "BOM_Oreja_2",
+    "BOM_Oreja_3",
+    "BOM_Oreja_4",
+    "BOM_Perno_1",
+    "BOM_Perno_1_Cabeza",
+    "BOM_Perno_2",
+    "BOM_Perno_2_Cabeza",
+    "BOM_Tapa",
+    "Cylinder.004",
+    "HID_Abrazadera_D_1",
+    "HID_Abrazadera_D_2",
+    "HID_Abrazadera_I_1",
+    "HID_Abrazadera_I_2",
+    "HID_Boquilla_D",
+    "HID_Boquilla_I",
+    "HID_Brida_D",
+    "HID_Brida_I",
+    "HID_Manguito_D",
+    "HID_Manguito_I",
+    "HID_Pasamuros_D",
+    "HID_Pasamuros_I"
+   ],
+   "n_piezas": 70,
+   "vertices": 7355,
+   "triangulos": 12981,
+   "cota_mm": {
+    "largo": 114.4,
+    "ancho": 39.0,
+    "alto": 49.5
+   },
+   "centro": [
+    0.0002,
+    0.0614,
+    0.04412
+   ],
+   "ancla": [
+    0.0002,
+    0.0064,
+    0.04412
+   ],
+   "materiales": [
+    "MAT_Acero",
+    "MAT_BCU_Grabado",
+    "MAT_BCU_Husillo",
+    "MAT_BCU_Manguito",
+    "MAT_BCU_Motor",
+    "MAT_BCU_Nervio",
+    "MAT_BCU_Racor",
+    "MAT_BCU_Rojo",
+    "MAT_BCU_Sensor",
+    "MAT_BCU_Tapa",
+    "MAT_BCU_Tornillo",
+    "MAT_Goma",
+    "MAT_Impreso",
+    "MAT_Laton"
+   ],
+   "punto": true
+  },
+  {
+   "id": "casco",
+   "titulo": "Hull and skin",
+   "subtitulo": "Rigid shell · silicone skin · fins · bulkhead",
+   "descripcion": "The front half is a rigid watertight shell; the rear half is silicone skin. That boundary is the whole idea: a soft body undulates instead of hinging, which is why it swims without the noise or the wake of a propeller.",
+   "piezas": [
+    "Body",
+    "Body.001",
+    "Body.002",
+    "CAS_Mamparo",
+    "CAS_Mamparo_Brida",
+    "CAS_Mamparo_Nervio_1",
+    "CAS_Mamparo_Nervio_2",
+    "CAS_Mamparo_Resalte_D",
+    "CAS_Mamparo_Resalte_I",
+    "CAS_Mamparo_Tornillo_01",
+    "CAS_Mamparo_Tornillo_02",
+    "CAS_Mamparo_Tornillo_03",
+    "CAS_Mamparo_Tornillo_04",
+    "CAS_Mamparo_Tornillo_05",
+    "CAS_Mamparo_Tornillo_06",
+    "CAS_Mamparo_Tornillo_07",
+    "CAS_Mamparo_Tornillo_08",
+    "CAS_Mamparo_Tornillo_09",
+    "CAS_Mamparo_Tornillo_10",
+    "CAS_Mamparo_Tornillo_11",
+    "CAS_Mamparo_Tornillo_12",
+    "Cylinder.002",
+    "Cylinder.003",
+    "Head",
+    "Head.003",
+    "INT_Paso_Fluido",
+    "Plane",
+    "Plane.001"
+   ],
+   "n_piezas": 28,
+   "vertices": 12478,
+   "triangulos": 24592,
+   "cota_mm": {
+    "largo": 357.2,
+    "ancho": 94.3,
+    "alto": 143.9
+   },
+   "centro": [
+    0.00141,
+    0.06622,
+    0.00456
+   ],
+   "ancla": [
+    0.00141,
+    0.14022,
+    0.00456
+   ],
+   "materiales": [
+    "MAT_Acero",
+    "MAT_Adhesivo",
+    "MAT_Aleta",
+    "MAT_Casco",
+    "MAT_Impreso",
+    "MAT_Membrana",
+    "MAT_Silicona"
+   ],
+   "punto": false
+  },
+  {
+   "id": "cola",
+   "titulo": "Actuated tail",
+   "subtitulo": "Ribs · spine · dorsal spar · caudal fin",
+   "descripcion": "Ribs, spine and dorsal spar. The wave travels down the chain from front to back with a progressive phase — each rib lags slightly behind the one before it — and it is that travelling wave, not the slap of the fin, that produces thrust.",
+   "piezas": [
+    "ESQ_Costilla_01",
+    "ESQ_Costilla_02",
+    "ESQ_Costilla_03",
+    "ESQ_Costilla_04",
+    "ESQ_Costilla_05",
+    "ESQ_Costilla_06",
+    "ESQ_Costilla_07",
+    "ESQ_Costilla_08",
+    "ESQ_Costilla_09",
+    "ESQ_Costilla_10",
+    "ESQ_Costilla_11",
+    "ESQ_Costilla_12",
+    "ESQ_Costilla_13",
+    "ESQ_Costilla_14",
+    "ESQ_Costilla_15",
+    "ESQ_Espina",
+    "ESQ_Larguero_Dorsal",
+    "ESQ_Pestana_01",
+    "ESQ_Pestana_02",
+    "ESQ_Pestana_03",
+    "ESQ_Pestana_04",
+    "ESQ_Pestana_05"
+   ],
+   "n_piezas": 22,
+   "vertices": 11464,
+   "triangulos": 22968,
+   "cota_mm": {
+    "largo": 116.3,
+    "ancho": 43.8,
+    "alto": 85.2
+   },
+   "centro": [
+    0.0005,
+    0.057,
+    -0.06613
+   ],
+   "ancla": [
+    0.0005,
+    0.115,
+    -0.06613
+   ],
+   "materiales": [
+    "MAT_Esqueleto"
+   ],
+   "punto": true
+  }
+ ],
+ "camaras": [
+  {
+   "id": "hero",
+   "titulo": "Hero",
+   "dir": [
+    0.5531,
+    0.3226,
+    0.7681
+   ],
+   "mira": [
+    0.0,
+    0.0657,
+    0.008
+   ],
+   "caja": {
+    "min": [
+     -0.08915,
+     -0.00683,
+     -0.17405
+    ],
+    "max": [
+     0.08915,
+     0.13817,
+     0.19005
+    ]
+   }
+  },
+  {
+   "id": "lateral",
+   "titulo": "Side",
+   "dir": [
+    0.9974,
+    0.0698,
+    0.0199
+   ],
+   "mira": [
+    0.0,
+    0.0657,
+    0.008
+   ],
+   "caja": {
+    "min": [
+     -0.08915,
+     -0.00683,
+     -0.17405
+    ],
+    "max": [
+     0.08915,
+     0.13817,
+     0.19005
+    ]
+   }
+  },
+  {
+   "id": "cenital",
+   "titulo": "Dollhouse",
+   "dir": [
+    0.2083,
+    0.9466,
+    0.2461
+   ],
+   "mira": [
+    0.0,
+    0.0657,
+    0.008
+   ],
+   "caja": {
+    "min": [
+     -0.08915,
+     -0.00683,
+     -0.17405
+    ],
+    "max": [
+     0.08915,
+     0.13817,
+     0.19005
+    ]
+   }
+  },
+  {
+   "id": "cola",
+   "titulo": "Tail detail",
+   "dir": [
+    0.6969,
+    0.369,
+    0.6149
+   ],
+   "mira": [
+    0.0005,
+    0.057,
+    -0.0661
+   ],
+   "caja": {
+    "min": [
+     -0.0214,
+     0.01437,
+     -0.12427
+    ],
+    "max": [
+     0.0224,
+     0.09962,
+     -0.008
+    ]
+   }
+  },
+  {
+   "id": "cabeza",
+   "titulo": "Head detail",
+   "dir": [
+    0.62,
+    0.2712,
+    0.7362
+   ],
+   "mira": [
+    0.0,
+    0.0699,
+    0.1171
+   ],
+   "caja": {
+    "min": [
+     -0.02492,
+     0.00291,
+     0.05262
+    ],
+    "max": [
+     0.02492,
+     0.13681,
+     0.18149
+    ]
+   }
+  }
+ ],
+ "huesos": [
+  {
+   "nombre": "CUERPO",
+   "padre": null,
+   "largo_mm": 170.0
+  },
+  {
+   "nombre": "COLA_01",
+   "padre": "CUERPO",
+   "largo_mm": 20.0
+  },
+  {
+   "nombre": "COLA_02",
+   "padre": "COLA_01",
+   "largo_mm": 22.0
+  },
+  {
+   "nombre": "COLA_03",
+   "padre": "COLA_02",
+   "largo_mm": 21.0
+  },
+  {
+   "nombre": "COLA_04",
+   "padre": "COLA_03",
+   "largo_mm": 19.0
+  },
+  {
+   "nombre": "COLA_05",
+   "padre": "COLA_04",
+   "largo_mm": 17.0
+  },
+  {
+   "nombre": "COLA_06",
+   "padre": "COLA_05",
+   "largo_mm": 15.0
+  },
+  {
+   "nombre": "CAUDAL",
+   "padre": "COLA_06",
+   "largo_mm": 52.0
+  },
+  {
+   "nombre": "PECT_D",
+   "padre": "CUERPO",
+   "largo_mm": 77.1
+  },
+  {
+   "nombre": "PECT_I",
+   "padre": "CUERPO",
+   "largo_mm": 77.1
+  },
+  {
+   "nombre": "DORSAL",
+   "padre": "CUERPO",
+   "largo_mm": 33.0
+  }
+ ],
+ "huesos_cola": [
+  "COLA_01",
+  "COLA_02",
+  "COLA_03",
+  "COLA_04",
+  "COLA_05",
+  "COLA_06",
+  "CAUDAL"
+ ],
+ "capas": [
+  {
+   "id": "piel",
+   "titulo": "Skin and fins"
+  },
+  {
+   "id": "carcasa",
+   "titulo": "Rigid shell"
+  },
+  {
+   "id": "estructura",
+   "titulo": "Tail structure"
+  }
+ ],
+ "piezas": {
+  "BCU_Abrazadera": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Tornillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Boca": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Racor",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Brida_Popa": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Tapa",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Brida_Proa": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Tapa",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Cifra_0": {
+   "conjunto": "hidraulica",
+   "triangulos": 96,
+   "vertices": 96,
+   "material": "MAT_BCU_Grabado",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Cifra_10": {
+   "conjunto": "hidraulica",
+   "triangulos": 98,
+   "vertices": 100,
+   "material": "MAT_BCU_Grabado",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Cifra_20": {
+   "conjunto": "hidraulica",
+   "triangulos": 183,
+   "vertices": 185,
+   "material": "MAT_BCU_Grabado",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Cifra_30": {
+   "conjunto": "hidraulica",
+   "triangulos": 241,
+   "vertices": 243,
+   "material": "MAT_BCU_Grabado",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Cifra_40": {
+   "conjunto": "hidraulica",
+   "triangulos": 111,
+   "vertices": 111,
+   "material": "MAT_BCU_Grabado",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Husillo": {
+   "conjunto": "hidraulica",
+   "triangulos": 44,
+   "vertices": 24,
+   "material": "MAT_BCU_Husillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Manguito": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Manguito",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Marca_0": {
+   "conjunto": "hidraulica",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_BCU_Grabado",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Marca_10": {
+   "conjunto": "hidraulica",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_BCU_Grabado",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Marca_20": {
+   "conjunto": "hidraulica",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_BCU_Grabado",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Marca_30": {
+   "conjunto": "hidraulica",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_BCU_Grabado",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Marca_40": {
+   "conjunto": "hidraulica",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_BCU_Grabado",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Motor": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Motor",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Motor_Tapa": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Tapa",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Nervio_0": {
+   "conjunto": "hidraulica",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_BCU_Nervio",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Nervio_1": {
+   "conjunto": "hidraulica",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_BCU_Nervio",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Nervio_2": {
+   "conjunto": "hidraulica",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_BCU_Nervio",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Nervio_3": {
+   "conjunto": "hidraulica",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_BCU_Nervio",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Racor": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Racor",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Rosca_0": {
+   "conjunto": "hidraulica",
+   "triangulos": 44,
+   "vertices": 24,
+   "material": "MAT_BCU_Husillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Rosca_1": {
+   "conjunto": "hidraulica",
+   "triangulos": 44,
+   "vertices": 24,
+   "material": "MAT_BCU_Husillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Rosca_2": {
+   "conjunto": "hidraulica",
+   "triangulos": 44,
+   "vertices": 24,
+   "material": "MAT_BCU_Husillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Rosca_3": {
+   "conjunto": "hidraulica",
+   "triangulos": 44,
+   "vertices": 24,
+   "material": "MAT_BCU_Husillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Rotulo": {
+   "conjunto": "hidraulica",
+   "triangulos": 596,
+   "vertices": 600,
+   "material": "MAT_BCU_Grabado",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Sensor_Base": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Sensor",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Sensor_Cuerpo": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Tapa",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Tapa_Popa": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Tapa",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Tapa_Proa": {
+   "conjunto": "hidraulica",
+   "triangulos": 92,
+   "vertices": 48,
+   "material": "MAT_BCU_Tapa",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Tornillos_Popa": {
+   "conjunto": "hidraulica",
+   "triangulos": 224,
+   "vertices": 128,
+   "material": "MAT_BCU_Tornillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BCU_Tornillos_Proa": {
+   "conjunto": "hidraulica",
+   "triangulos": 224,
+   "vertices": 128,
+   "material": "MAT_BCU_Tornillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Boca_1": {
+   "conjunto": "hidraulica",
+   "triangulos": 236,
+   "vertices": 120,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Boca_1_Labio": {
+   "conjunto": "hidraulica",
+   "triangulos": 236,
+   "vertices": 120,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Boca_2": {
+   "conjunto": "hidraulica",
+   "triangulos": 236,
+   "vertices": 120,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Boca_2_Labio": {
+   "conjunto": "hidraulica",
+   "triangulos": 236,
+   "vertices": 120,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Boca_3": {
+   "conjunto": "hidraulica",
+   "triangulos": 236,
+   "vertices": 120,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Boca_3_Labio": {
+   "conjunto": "hidraulica",
+   "triangulos": 236,
+   "vertices": 120,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Boca_4": {
+   "conjunto": "hidraulica",
+   "triangulos": 236,
+   "vertices": 120,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Boca_4_Labio": {
+   "conjunto": "hidraulica",
+   "triangulos": 236,
+   "vertices": 120,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Carter": {
+   "conjunto": "hidraulica",
+   "triangulos": 476,
+   "vertices": 240,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Carter_Resalte": {
+   "conjunto": "hidraulica",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Engranaje_1": {
+   "conjunto": "hidraulica",
+   "triangulos": 1472,
+   "vertices": 760,
+   "material": "MAT_Laton",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Engranaje_2": {
+   "conjunto": "hidraulica",
+   "triangulos": 1472,
+   "vertices": 760,
+   "material": "MAT_Laton",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Faldon": {
+   "conjunto": "hidraulica",
+   "triangulos": 476,
+   "vertices": 240,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Junta": {
+   "conjunto": "hidraulica",
+   "triangulos": 476,
+   "vertices": 240,
+   "material": "MAT_Goma",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Oreja_1": {
+   "conjunto": "hidraulica",
+   "triangulos": 304,
+   "vertices": 152,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Oreja_2": {
+   "conjunto": "hidraulica",
+   "triangulos": 304,
+   "vertices": 152,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Oreja_3": {
+   "conjunto": "hidraulica",
+   "triangulos": 304,
+   "vertices": 152,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Oreja_4": {
+   "conjunto": "hidraulica",
+   "triangulos": 304,
+   "vertices": 152,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Perno_1": {
+   "conjunto": "hidraulica",
+   "triangulos": 164,
+   "vertices": 84,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Perno_1_Cabeza": {
+   "conjunto": "hidraulica",
+   "triangulos": 164,
+   "vertices": 84,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Perno_2": {
+   "conjunto": "hidraulica",
+   "triangulos": 164,
+   "vertices": 84,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Perno_2_Cabeza": {
+   "conjunto": "hidraulica",
+   "triangulos": 164,
+   "vertices": 84,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BOM_Tapa": {
+   "conjunto": "hidraulica",
+   "triangulos": 476,
+   "vertices": 240,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Body": {
+   "conjunto": "casco",
+   "triangulos": 620,
+   "vertices": 314,
+   "material": "MAT_Casco",
+   "capa": 1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Body.001": {
+   "conjunto": "casco",
+   "triangulos": 188,
+   "vertices": 96,
+   "material": "MAT_Casco",
+   "capa": 1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Body.002": {
+   "conjunto": "casco",
+   "triangulos": 1084,
+   "vertices": 544,
+   "material": "MAT_Silicona",
+   "capa": 0,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BézierCurve": {
+   "conjunto": "cabeza",
+   "triangulos": 288,
+   "vertices": 156,
+   "material": "MAT_Antena",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "BézierCurve.001": {
+   "conjunto": "cabeza",
+   "triangulos": 288,
+   "vertices": 156,
+   "material": "MAT_Antena",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Barrilete": {
+   "conjunto": "optica",
+   "triangulos": 332,
+   "vertices": 168,
+   "material": "MAT_Plastico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.00047
+   ]
+  },
+  "CAM_Bisel": {
+   "conjunto": "optica",
+   "triangulos": 380,
+   "vertices": 192,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.01591
+   ]
+  },
+  "CAM_Diafragma": {
+   "conjunto": "optica",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_OPT_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.00343
+   ]
+  },
+  "CAM_Domo": {
+   "conjunto": "optica",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_OPT_Vidrio",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.01279
+   ]
+  },
+  "CAM_Domo_Aro": {
+   "conjunto": "optica",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_OPT_Anillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.01404
+   ]
+  },
+  "CAM_Elemento_1": {
+   "conjunto": "optica",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_OPT_Vidrio",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0078
+   ]
+  },
+  "CAM_Elemento_2": {
+   "conjunto": "optica",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_OPT_Vidrio",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.00468
+   ]
+  },
+  "CAM_Elemento_3": {
+   "conjunto": "optica",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_OPT_Vidrio",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.00203
+   ]
+  },
+  "CAM_Junta_Frontal": {
+   "conjunto": "optica",
+   "triangulos": 416,
+   "vertices": 208,
+   "material": "MAT_OPT_Junta",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.01108
+   ]
+  },
+  "CAM_Junta_Trasera": {
+   "conjunto": "optica",
+   "triangulos": 416,
+   "vertices": 208,
+   "material": "MAT_OPT_Junta",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Latiguillo": {
+   "conjunto": "cabeza",
+   "triangulos": 460,
+   "vertices": 240,
+   "material": "MAT_Flex",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Lente": {
+   "conjunto": "optica",
+   "triangulos": 960,
+   "vertices": 482,
+   "material": "MAT_Optica",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.01498
+   ]
+  },
+  "CAM_Modulo": {
+   "conjunto": "optica",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_PCB",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Reten_Frontal": {
+   "conjunto": "optica",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_OPT_Laton",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.00967
+   ]
+  },
+  "CAM_Reten_Trasero": {
+   "conjunto": "optica",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_OPT_Laton",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.00094
+   ]
+  },
+  "CAM_Sensor": {
+   "conjunto": "optica",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Plastico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Separador_1": {
+   "conjunto": "optica",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_OPT_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.00624
+   ]
+  },
+  "CAM_Tornillos_Diafragma": {
+   "conjunto": "optica",
+   "triangulos": 360,
+   "vertices": 200,
+   "material": "MAT_OPT_Tornillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.00343
+   ]
+  },
+  "CAM_Tornillos_Frontal": {
+   "conjunto": "optica",
+   "triangulos": 432,
+   "vertices": 240,
+   "material": "MAT_OPT_Tornillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.00967
+   ]
+  },
+  "CAS_Mamparo": {
+   "conjunto": "casco",
+   "triangulos": 256,
+   "vertices": 130,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Brida": {
+   "conjunto": "casco",
+   "triangulos": 256,
+   "vertices": 128,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Nervio_1": {
+   "conjunto": "casco",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Nervio_2": {
+   "conjunto": "casco",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Resalte_D": {
+   "conjunto": "casco",
+   "triangulos": 56,
+   "vertices": 30,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Resalte_I": {
+   "conjunto": "casco",
+   "triangulos": 56,
+   "vertices": 30,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_01": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_02": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_03": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_04": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_05": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_06": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_07": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_08": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_09": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_10": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_11": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAS_Mamparo_Tornillo_12": {
+   "conjunto": "casco",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CBL_Potencia_Negro": {
+   "conjunto": "cabeza",
+   "triangulos": 460,
+   "vertices": 240,
+   "material": "MAT_Plastico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CBL_Potencia_Rojo": {
+   "conjunto": "cabeza",
+   "triangulos": 460,
+   "vertices": 240,
+   "material": "MAT_CableRojo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CBL_Senal_Bomba": {
+   "conjunto": "cabeza",
+   "triangulos": 300,
+   "vertices": 160,
+   "material": "MAT_Plastico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Camera": {
+   "conjunto": "optica",
+   "triangulos": 700,
+   "vertices": 352,
+   "material": "MAT_PortaOptica",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Cube": {
+   "conjunto": "cabeza",
+   "triangulos": 72,
+   "vertices": 40,
+   "material": "MAT_Casco.001",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Cube.001": {
+   "conjunto": "cabeza",
+   "triangulos": 48,
+   "vertices": 28,
+   "material": "MAT_Casco",
+   "capa": 1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Cube.002": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Casco",
+   "capa": 1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Cylinder": {
+   "conjunto": "pectorales",
+   "triangulos": 20480,
+   "vertices": 10373,
+   "material": "MAT_Aleta",
+   "capa": 0,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Cylinder.001": {
+   "conjunto": "cabeza",
+   "triangulos": 956,
+   "vertices": 480,
+   "material": "MAT_Antena",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Cylinder.002": {
+   "conjunto": "casco",
+   "triangulos": 10240,
+   "vertices": 5185,
+   "material": "MAT_Aleta",
+   "capa": 0,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Cylinder.003": {
+   "conjunto": "casco",
+   "triangulos": 10240,
+   "vertices": 5185,
+   "material": "MAT_Aleta",
+   "capa": 0,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Cylinder.004": {
+   "conjunto": "hidraulica",
+   "triangulos": 380,
+   "vertices": 192,
+   "material": "MAT_BCU_Rojo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Cylinder.005": {
+   "conjunto": "cabeza",
+   "triangulos": 4092,
+   "vertices": 2048,
+   "material": "MAT_Goma",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Bateria_Etiqueta": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Bateria_LiPo": {
+   "conjunto": "cabeza",
+   "triangulos": 188,
+   "vertices": 96,
+   "material": "MAT_LiPo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Chip_01": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Chip_01.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Chip_02": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Costado_1": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Costado_2": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Cuaderna_1": {
+   "conjunto": "cabeza",
+   "triangulos": 672,
+   "vertices": 336,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Cuna": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Liston_1": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Liston_2": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Liston_3": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Liston_4": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Marca_INT_Placa_mbed": {
+   "conjunto": "cabeza",
+   "triangulos": 139,
+   "vertices": 145,
+   "material": "MAT_ELE_Serigrafia",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Marca_PCB_Principal": {
+   "conjunto": "cabeza",
+   "triangulos": 139,
+   "vertices": 145,
+   "material": "MAT_ELE_Serigrafia",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_03": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_04": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_04.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_05": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_05.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Ceramico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_06": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_06.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_07": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_07.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Ceramico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_08": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_08.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Ceramico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_09": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_09.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_10": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_10.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Ceramico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_11": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_11.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Ceramico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_12": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_12.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Ceramico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_13": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_13.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_14": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Ceramico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_14.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_15": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_15.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_16": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Ceramico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_17": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_18": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Ceramico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_18.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Ceramico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_20": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_21": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_25": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pasivo_28": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Cuerpo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_0_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_0_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_0_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_0_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_1_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_1_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_1_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_1_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_2_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_2_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_2_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_2_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_3_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_3_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_3_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_3_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_4_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_01_4_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_02_0_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_02_0_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_02_1_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_02_1_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_02_2_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_02_2_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_02_3_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pat_02_3_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Patilla",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pinza_1": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Pinza_2": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Punto1_01": {
+   "conjunto": "cabeza",
+   "triangulos": 52,
+   "vertices": 28,
+   "material": "MAT_ELE_Punto",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Punto1_01.001": {
+   "conjunto": "cabeza",
+   "triangulos": 52,
+   "vertices": 28,
+   "material": "MAT_ELE_Punto",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Punto1_02": {
+   "conjunto": "cabeza",
+   "triangulos": 52,
+   "vertices": 28,
+   "material": "MAT_ELE_Punto",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Rotulo_INT_Placa_mbed": {
+   "conjunto": "cabeza",
+   "triangulos": 185,
+   "vertices": 191,
+   "material": "MAT_ELE_Serigrafia",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Rotulo_PCB_Principal": {
+   "conjunto": "cabeza",
+   "triangulos": 470,
+   "vertices": 484,
+   "material": "MAT_ELE_Serigrafia",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Serig_01": {
+   "conjunto": "cabeza",
+   "triangulos": 320,
+   "vertices": 322,
+   "material": "MAT_ELE_Serigrafia",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Serig_01.001": {
+   "conjunto": "cabeza",
+   "triangulos": 197,
+   "vertices": 199,
+   "material": "MAT_ELE_Serigrafia",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Serig_02": {
+   "conjunto": "cabeza",
+   "triangulos": 335,
+   "vertices": 337,
+   "material": "MAT_ELE_Serigrafia",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_03_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_03_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_04_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_04_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_04_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_04_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_05_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_05_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_05_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_05_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_06_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_06_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_06_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_06_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_07_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_07_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_07_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_07_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_08_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_08_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_08_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_08_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_09_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_09_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_09_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_09_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_10_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_10_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_10_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_10_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_11_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_11_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_11_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_11_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_12_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_12_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_12_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_12_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_13_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_13_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_13_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_13_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_14_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_14_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_14_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_14_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_15_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_15_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_15_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_15_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_16_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_16_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_17_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_17_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_18_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_18_-1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_18_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_18_1.001": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_20_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_20_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_21_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_21_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_25_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_25_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_28_-1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ELE_Term_28_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_ELE_Metal",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_01": {
+   "conjunto": "cola",
+   "triangulos": 1768,
+   "vertices": 880,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_02": {
+   "conjunto": "cola",
+   "triangulos": 1768,
+   "vertices": 880,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_03": {
+   "conjunto": "cola",
+   "triangulos": 1768,
+   "vertices": 880,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_04": {
+   "conjunto": "cola",
+   "triangulos": 1816,
+   "vertices": 904,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_05": {
+   "conjunto": "cola",
+   "triangulos": 1864,
+   "vertices": 928,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_06": {
+   "conjunto": "cola",
+   "triangulos": 1864,
+   "vertices": 928,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_07": {
+   "conjunto": "cola",
+   "triangulos": 1864,
+   "vertices": 928,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_08": {
+   "conjunto": "cola",
+   "triangulos": 1864,
+   "vertices": 928,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_09": {
+   "conjunto": "cola",
+   "triangulos": 1864,
+   "vertices": 928,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_10": {
+   "conjunto": "cola",
+   "triangulos": 1864,
+   "vertices": 928,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_11": {
+   "conjunto": "cola",
+   "triangulos": 672,
+   "vertices": 336,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_12": {
+   "conjunto": "cola",
+   "triangulos": 672,
+   "vertices": 336,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_13": {
+   "conjunto": "cola",
+   "triangulos": 672,
+   "vertices": 336,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_14": {
+   "conjunto": "cola",
+   "triangulos": 672,
+   "vertices": 336,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Costilla_15": {
+   "conjunto": "cola",
+   "triangulos": 672,
+   "vertices": 336,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Espina": {
+   "conjunto": "cola",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Larguero_Dorsal": {
+   "conjunto": "cola",
+   "triangulos": 656,
+   "vertices": 336,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Pestana_01": {
+   "conjunto": "cola",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Pestana_02": {
+   "conjunto": "cola",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Pestana_03": {
+   "conjunto": "cola",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Pestana_04": {
+   "conjunto": "cola",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ESQ_Pestana_05": {
+   "conjunto": "cola",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Esqueleto",
+   "capa": 2,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Abrazadera_D_1": {
+   "conjunto": "hidraulica",
+   "triangulos": 40,
+   "vertices": 22,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Abrazadera_D_2": {
+   "conjunto": "hidraulica",
+   "triangulos": 40,
+   "vertices": 22,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Abrazadera_I_1": {
+   "conjunto": "hidraulica",
+   "triangulos": 40,
+   "vertices": 22,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Abrazadera_I_2": {
+   "conjunto": "hidraulica",
+   "triangulos": 40,
+   "vertices": 22,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Boquilla_D": {
+   "conjunto": "hidraulica",
+   "triangulos": 48,
+   "vertices": 26,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Boquilla_I": {
+   "conjunto": "hidraulica",
+   "triangulos": 48,
+   "vertices": 26,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Brida_D": {
+   "conjunto": "hidraulica",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Brida_I": {
+   "conjunto": "hidraulica",
+   "triangulos": 24,
+   "vertices": 14,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Manguito_D": {
+   "conjunto": "hidraulica",
+   "triangulos": 140,
+   "vertices": 72,
+   "material": "MAT_Goma",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Manguito_I": {
+   "conjunto": "hidraulica",
+   "triangulos": 140,
+   "vertices": 72,
+   "material": "MAT_Goma",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Pasamuros_D": {
+   "conjunto": "hidraulica",
+   "triangulos": 48,
+   "vertices": 26,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "HID_Pasamuros_I": {
+   "conjunto": "hidraulica",
+   "triangulos": 48,
+   "vertices": 26,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Head": {
+   "conjunto": "casco",
+   "triangulos": 700,
+   "vertices": 352,
+   "material": "MAT_Casco",
+   "capa": 1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Head.001": {
+   "conjunto": "cabeza",
+   "triangulos": 196,
+   "vertices": 100,
+   "material": "MAT_Casco",
+   "capa": 1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Head.002": {
+   "conjunto": "cabeza",
+   "triangulos": 196,
+   "vertices": 100,
+   "material": "MAT_Casco",
+   "capa": 1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Head.003": {
+   "conjunto": "casco",
+   "triangulos": 380,
+   "vertices": 192,
+   "material": "MAT_Casco",
+   "capa": 1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Cinta_Conector_1": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Chip",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Cinta_Conector_2": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Chip",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Cinta_Plana": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_CintaPlana",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Hilo_Servo_1": {
+   "conjunto": "cabeza",
+   "triangulos": 176,
+   "vertices": 96,
+   "material": "MAT_Hilo_Amarillo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Hilo_Servo_2": {
+   "conjunto": "cabeza",
+   "triangulos": 176,
+   "vertices": 96,
+   "material": "MAT_Hilo_Rojo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Hilo_Servo_3": {
+   "conjunto": "cabeza",
+   "triangulos": 176,
+   "vertices": 96,
+   "material": "MAT_Plastico",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_LiPo_Bolsa_1": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_LiPo_Oro",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_LiPo_Bolsa_2": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_LiPo_Oro",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Mbed_Boton": {
+   "conjunto": "cabeza",
+   "triangulos": 188,
+   "vertices": 96,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Mbed_Micro": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Chip",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Mbed_Pin_1": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Mbed_Pin_2": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Mbed_Pin_3": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Mbed_Pin_4": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Mbed_Pin_5": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Mbed_Pin_6": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Mbed_Pin_7": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Mbed_Pin_8": {
+   "conjunto": "cabeza",
+   "triangulos": 12,
+   "vertices": 8,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Paso_Fluido": {
+   "conjunto": "casco",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Adhesivo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Placa_mbed": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_INT_Placa_mbed_Cobre",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "INT_Resina": {
+   "conjunto": "cabeza",
+   "triangulos": 324,
+   "vertices": 164,
+   "material": "MAT_Resina",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Bornes": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_LiPo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Condensador_1": {
+   "conjunto": "cabeza",
+   "triangulos": 284,
+   "vertices": 144,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Condensador_2": {
+   "conjunto": "cabeza",
+   "triangulos": 284,
+   "vertices": 144,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Conector": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Chip",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Driver": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Chip",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Micro": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Chip",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Patillas_Driver": {
+   "conjunto": "cabeza",
+   "triangulos": 120,
+   "vertices": 80,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Patillas_Micro": {
+   "conjunto": "cabeza",
+   "triangulos": 288,
+   "vertices": 192,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Patillas_Regulador": {
+   "conjunto": "cabeza",
+   "triangulos": 36,
+   "vertices": 24,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Principal": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_PCB_Principal_Cobre",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Regulador": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Chip",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Tira_Pines": {
+   "conjunto": "cabeza",
+   "triangulos": 72,
+   "vertices": 48,
+   "material": "MAT_Laton",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PCB_Tira_Zocalo": {
+   "conjunto": "cabeza",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Chip",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PECT_Horn_D": {
+   "conjunto": "pectorales",
+   "triangulos": 188,
+   "vertices": 96,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PECT_Horn_I": {
+   "conjunto": "pectorales",
+   "triangulos": 188,
+   "vertices": 96,
+   "material": "MAT_Impreso",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PECT_Servo_D": {
+   "conjunto": "pectorales",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Servo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PECT_Servo_I": {
+   "conjunto": "pectorales",
+   "triangulos": 108,
+   "vertices": 56,
+   "material": "MAT_Servo",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PECT_Varilla_D": {
+   "conjunto": "pectorales",
+   "triangulos": 176,
+   "vertices": 96,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "PECT_Varilla_I": {
+   "conjunto": "pectorales",
+   "triangulos": 176,
+   "vertices": 96,
+   "material": "MAT_Acero",
+   "capa": -1,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Plane": {
+   "conjunto": "casco",
+   "triangulos": 60,
+   "vertices": 32,
+   "material": "MAT_Membrana",
+   "capa": 0,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "Plane.001": {
+   "conjunto": "casco",
+   "triangulos": 36,
+   "vertices": 20,
+   "material": "MAT_Membrana",
+   "capa": 0,
+   "despliegue": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "sin_conjunto": []
+}

@@ -1,0 +1,670 @@
+/* SoFi — configurador.
+   La identidad es la de LIBELA, no la de la referencia de la que partió: negro,
+   blanco y el amarillo de la web, con Lato en los rótulos. El mono se queda sólo
+   para las cifras, que ahí es función y no estilo: cualquier panel de datos lo
+   usa, porque alinea las columnas de números.
+   El acento vive en --acento: cambiarlo ahí repinta toda la interfaz. */
+
+:root {
+  --fondo:   #f4f4f2;
+  --panel:   #ffffff;
+  --tinta:   #0b0b0c;
+  --suave:   #5f6268;
+  --linea:   #e2e2e0;
+  --raya:    #d2d2cf;
+  --acento:  #ffff00;
+  /* Nunca blanco sobre amarillo ni amarillo sobre blanco: no hay contraste.
+     Lo que va encima del acento es negro, siempre, y además ése es el par de
+     la marca. */
+  --sobre-acento: #0b0b0c;
+  --acento-t:#8a7c00;   /* el amarillo puro sobre blanco no se lee: para texto va oscurecido */
+  --ok:      #1f9d6a;
+  --barra:   #0b0b0c;
+  --hueco:   #ededea;
+  --sombra:  0 1px 2px rgba(0,0,0,.05), 0 8px 24px -12px rgba(0,0,0,.18);
+  --radio:   8px;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans: "Lato", Arial, Helvetica, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fondo: #07090b; --panel: #101316; --tinta: #f4f5f6; --suave: #b4bcc5;
+    --linea: #1e2328; --raya: #2a3036; --barra: #e8eaec; --hueco: #171b1f;
+    --acento-t: #ffff00;
+    --sombra: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --fondo: #07090b; --panel: #101316; --tinta: #f4f5f6; --suave: #b4bcc5;
+  --linea: #1e2328; --raya: #2a3036; --barra: #e8eaec; --hueco: #171b1f;
+  --acento-t: #ffff00;
+  --sombra: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.7);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+#app {
+  display: grid;
+  /* 300 en vez de 286: con la letra de dato a 12 px los botones de conjunto se
+     partían en tres filas y empujaban el panel de subsistemas fuera. */
+  grid-template-columns: 300px minmax(0, 1fr) 300px;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "barra  barra  barra"
+    "izq    escena der"
+    "pie    pie    pie";
+  /* Antes 12 px por todos lados: con cinco columnas de paneles eso son
+     sesenta de aire que no pintan nada y le roban sitio al visor. */
+  gap: 7px;
+  height: 100dvh;
+  padding: 12px;
+}
+
+/* ───────────── cabecera ───────────── */
+.barra {
+  grid-area: barra;
+  display: grid;
+  /* Cinco columnas: marca, título, barra de batido, cifras y el interruptor de
+     vista. Con cuatro, el botón se caía a una segunda fila debajo de la marca. */
+  grid-template-columns: auto minmax(180px, 1fr) minmax(170px, 300px) auto auto;
+  align-items: center;
+  gap: 24px;
+}
+
+.marca {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--acento); color: var(--sobre-acento);
+  padding: 10px 14px; border-radius: var(--radio);
+  font-family: var(--mono); font-weight: 700; letter-spacing: .12em; font-size: 12px;
+}
+.marca svg { width: 28px; height: 18px; }
+
+.titulo h1 { font-size: 30px; font-weight: 700; line-height: 1; letter-spacing: -.01em; }
+.titulo h1 i { color: var(--acento-t); font-style: normal; }
+.sobretitulo, .subtitulo {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--suave);
+}
+.sobretitulo { margin-bottom: 3px; }
+.subtitulo { margin-top: 3px; }
+
+.carga-cab, .carga-pie { display: flex; justify-content: space-between; }
+.carga-cab span, .carga-pie span, .carga-cab b {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+}
+.carga-cab span { color: var(--suave); }
+.carga-pie span { color: var(--suave); font-size: 11px; }
+.barras { display: flex; gap: 2px; margin: 5px 0 4px; height: 13px; }
+.barras i { flex: 1; background: var(--hueco); border-radius: 1px; }
+.barras i.on { background: var(--barra); }
+
+.meta { display: flex; gap: 22px; }
+.meta dt {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--suave); margin-bottom: 3px;
+}
+.meta dd { font-family: var(--mono); font-size: 15px; font-weight: 500; }
+.estado { display: flex; align-items: center; gap: 6px; }
+.estado i { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+
+/* ───────────── columnas ───────────── */
+/* Las columnas se desbordaban sobre el pie en pantallas bajas: ahora ruedan
+   dentro de sí mismas y cada panel conserva su altura natural. */
+.col { display: flex; flex-direction: column; gap: 7px; min-height: 0; overflow-y: auto; }
+.col::-webkit-scrollbar { width: 6px; }
+.col::-webkit-scrollbar-thumb { background: var(--raya); border-radius: 3px; }
+.izq { grid-area: izq; }
+.der { grid-area: der; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  /* Apretado respecto a 13/14: con la letra a 12 px la columna derecha se
+     pasaba de largo y había que bajar para ver el último panel. */
+  padding: 10px 12px 11px;
+  box-shadow: var(--sombra);
+  flex: none;
+}
+.panel.crece { flex: 1 1 auto; min-height: 150px; display: flex; flex-direction: column; overflow: hidden; }
+
+.panel h2 {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  padding-left: 9px; position: relative; margin-bottom: 11px;
+}
+.panel h2::before {
+  content: ""; position: absolute; left: 0; top: 1px; bottom: 1px;
+  width: 3px; border-radius: 2px; background: var(--acento);
+}
+.panel h2 b { color: var(--suave); font-weight: 400; }
+
+.cifra { display: flex; align-items: baseline; gap: 4px; }
+.cifra strong { font-size: 34px; font-weight: 700; line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.cifra em { font-family: var(--mono); font-size: 12px; font-style: normal; color: var(--suave); }
+.cifra span {
+  margin-left: auto; font-size: 20px; font-weight: 600;
+  font-variant-numeric: tabular-nums; color: var(--acento-t);
+}
+.pie-cifra {
+  display: flex; justify-content: space-between; margin-top: 4px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--suave);
+}
+
+/* medidores */
+.medidores { list-style: none; margin-top: 11px; overflow-y: auto; }
+.panel.crece .medidores { flex: 1; }
+.medidores li {
+  display: grid; grid-template-columns: 56px 1fr 46px;
+  align-items: center; gap: 8px; padding: 2px 0;
+  font-family: var(--mono); font-size: 12px;
+}
+.medidores li span:first-child { color: var(--suave); letter-spacing: .06em; }
+.medidores li u { display: block; height: 5px; background: var(--hueco); border-radius: 3px; position: relative; }
+.medidores li u i {
+  position: absolute; top: 0; bottom: 0; background: var(--barra);
+  border-radius: 3px; transition: none;
+}
+.medidores li u i.centro { background: var(--acento); }
+.medidores li b { text-align: right; font-weight: 500; font-variant-numeric: tabular-nums; }
+
+/* filas de datos */
+.filas { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; }
+.filas dt, .filas dd { font-family: var(--mono); font-size: 12px; }
+.filas dt { color: var(--suave); letter-spacing: .05em; }
+.filas dd { text-align: right; font-weight: 500; font-variant-numeric: tabular-nums; }
+.filas dd.dif { color: var(--acento-t); }
+
+.nota {
+  display: flex; gap: 6px; align-items: baseline; margin-top: 8px;
+  padding-top: 7px; border-top: 1px solid var(--linea);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+}
+.nota span { color: var(--suave); }
+.nota b { font-weight: 500; }
+.nota b + span { margin-left: auto; }
+.nota-larga { display: block; line-height: 1.6; text-transform: none; letter-spacing: .02em; color: var(--suave); }
+
+/* fichas (botones) */
+.fichas { display: flex; flex-wrap: wrap; gap: 5px; }
+.fichas button {
+  /* Son los mandos: por debajo de 11 px no se dejan leer ni acertar con el dedo.
+     El resto de rótulos de dato sí se quedan pequeños, que es el estilo. */
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 7px 10px; border-radius: 6px;
+  border: 1px solid var(--raya); background: transparent; color: var(--tinta);
+  cursor: pointer; transition: background .13s, color .13s, border-color .13s;
+}
+.fichas button:hover { border-color: var(--tinta); }
+.fichas button[aria-pressed="true"] { background: var(--acento); border-color: var(--acento); color: var(--sobre-acento); }
+.fichas button:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+
+/* deslizador */
+.deslizador { display: grid; grid-template-columns: 1fr auto; gap: 5px; margin-top: 12px; }
+.deslizador span, .deslizador b {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+}
+.deslizador span { color: var(--suave); }
+.deslizador input { grid-column: 1 / -1; }
+
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 16px; background: transparent; cursor: pointer; }
+input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--hueco); }
+input[type="range"]::-moz-range-track { height: 4px; border-radius: 2px; background: var(--hueco); }
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px; margin-top: -5px;
+  border-radius: 50%; background: var(--acento); border: 2px solid var(--panel);
+}
+input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--acento); border: 2px solid var(--panel); }
+input[type="range"]:focus-visible { outline: 2px solid var(--acento); outline-offset: 3px; }
+
+/* subsistemas */
+.subsistemas { list-style: none; counter-reset: s; overflow-y: auto; flex: 1; }
+.subsistemas li {
+  counter-increment: s; display: grid; grid-template-columns: 18px 1fr auto;
+  gap: 7px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--linea);
+}
+.subsistemas li:last-child { border-bottom: 0; }
+.subsistemas li::before {
+  content: counter(s, decimal-leading-zero);
+  font-family: var(--mono); font-size: 12px; color: var(--suave);
+}
+.subsistemas strong { display: block; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .05em; }
+.subsistemas em { display: block; font-family: var(--mono); font-size: 12px; font-style: normal; color: var(--suave); letter-spacing: .04em; }
+.subsistemas i {
+  font-style: normal; font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .1em; padding: 3px 6px; border-radius: 4px;
+  background: color-mix(in srgb, var(--suave) 13%, transparent); color: var(--suave);
+}
+.subsistemas li.activo strong { color: var(--acento-t); }
+.subsistemas li.activo i { background: color-mix(in srgb, var(--acento) 14%, transparent); color: var(--acento-t); }
+
+/* ───────────── escena ───────────── */
+.escena {
+  grid-area: escena; position: relative; min-height: 0;
+  border-radius: var(--radio); overflow: hidden;
+  /* El fondo lo pinta ahora el agua, en 3D: aquí solo queda un azul de fondo
+     para el instante antes de que arranque el lienzo. El degradado de estudio se
+     ha quitado porque se veía por encima del océano en los bordes redondeados. */
+  background: #06222e;
+}
+#lienzo { display: block; width: 100%; height: 100%; touch-action: none; }
+
+
+/* Avisos de estudio: entran, se leen y se van. Abajo a la izquierda, donde no
+   pisan ni el rótulo de la demo ni el de la vista. */
+.aviso-estudio {
+  position: absolute; left: 16px; top: 14px; z-index: 7;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--sobre-acento);
+  background: var(--acento); padding: 5px 10px; border-radius: 999px;
+  opacity: 0; transform: translateY(-6px);
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;
+}
+.aviso-estudio.visible { opacity: 1; transform: none; }
+
+.marca-escena, .estado-grande {
+  position: absolute; font-family: var(--mono); pointer-events: none;
+}
+.marca-escena {
+  top: 14px; right: 16px; font-size: 11px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--suave);
+}
+.estado-grande {
+  left: 16px; bottom: 14px; font-family: var(--sans); font-size: 30px; font-weight: 700;
+  letter-spacing: -.01em; color: var(--acento-t); opacity: .9;
+}
+
+/* rótulos 3D */
+.rotulos { position: absolute; inset: 0; pointer-events: none; }
+.rotulos svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.rotulos line { stroke: var(--raya); stroke-width: 1; transition: opacity .18s; }
+.rotulo {
+  position: absolute; transform: translate(-50%, -50%);
+  display: flex; align-items: center; gap: 7px; white-space: nowrap;
+  transition: opacity .18s;
+}
+.rotulo b {
+  font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; padding: 4px 7px; border-radius: 5px;
+  background: var(--panel); border: 1px solid var(--linea); box-shadow: var(--sombra);
+}
+.rotulo::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--acento); flex: none; }
+
+.cargando {
+  position: absolute; inset: 0; display: grid; place-content: center; gap: 12px;
+  justify-items: center; background: var(--fondo); transition: opacity .4s;
+}
+.cargando.fuera { opacity: 0; pointer-events: none; }
+.cargando span {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 2px solid var(--raya); border-top-color: var(--acento);
+  animation: giro .8s linear infinite;
+}
+.cargando p { font-family: var(--mono); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--suave); }
+@keyframes giro { to { transform: rotate(360deg); } }
+
+.pieza-pie {
+  grid-area: pie; display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 2px 18px; line-height: 1.6;
+  /* Esta línea lleva la atribución al MIT y las licencias CC BY de los
+     corales y los peces. Empezó en versales a 9 px, ilegíble; luego 11 px, que
+     sigue por debajo del mínimo con el que se lee cómodo. Una atribución que
+     no se puede leer no es una atribución: 13 px y caja baja. */
+  font-family: var(--mono); font-size: 13px; letter-spacing: .02em;
+  color: var(--suave); padding: 0 2px;
+}
+.pieza-pie span:last-child { letter-spacing: .14em; text-transform: uppercase; }
+.pieza-pie span:first-child { flex: 1 1 320px; min-width: 0; }
+
+/* ───────────── adaptación ───────────── */
+@media (max-width: 1180px) {
+  #app { grid-template-columns: 250px minmax(0,1fr) 250px; }
+  .meta .solo-ancho { display: none; }
+  .titulo h1 { font-size: 24px; }
+}
+
+@media (max-width: 900px) {
+  body { overflow: auto; }
+  #app {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "barra" "escena" "der" "izq" "pie";
+    height: auto; min-height: 100dvh; gap: 10px; padding: 10px;
+  }
+  .barra { grid-template-columns: auto 1fr; gap: 12px; }
+  .carga, .meta { display: none; }
+  .escena { height: 56vh; min-height: 320px; }
+  .panel.crece { max-height: 300px; }
+  .estado-grande { font-size: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cargando span { animation: none; }
+  * { transition: none !important; }
+}
+
+
+/* ── pasada guiada ──────────────────────────────────────────────────────────
+   El rótulo de la demo. Abajo a la izquierda, sobre el agua, con sombra larga
+   para que se lea igual encima de un coral que encima del fondo oscuro. */
+.cine {
+  position: absolute; left: 22px; right: 22px; bottom: 20px;
+  opacity: 0; transition: opacity .35s ease; pointer-events: none;
+  text-shadow: 0 2px 18px rgba(0, 18, 28, .9);
+}
+.cine-titulo {
+  font-family: var(--display, var(--mono)); font-size: 38px; font-weight: 700;
+  letter-spacing: -.02em; line-height: 1.05; color: #fff; margin: 0 0 7px;
+}
+.cine-pie {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--acento); margin: 0;
+}
+/* Al grabar sobra el rótulo grande de estado: ya lo cuenta la cinemática. */
+/* Grabando no se ve el mando. Lo que se graba es el producto, no los botones
+   que lo conducen — y durante la demo nadie va a pulsarlos. Los paneles de
+   datos SÍ se quedan: enseñar la telemetría viva es parte de lo que se enseña. */
+body.grabando .estado-grande,
+body.grabando .mando,
+body.grabando .rotulos,
+body.grabando .pista { opacity: 0; pointer-events: none; }
+body.grabando .mando,
+body.grabando .rotulos { transition: opacity .5s ease; }
+/* La tarjeta se quita con display y no con opacidad: lleva una animación de
+   entrada con fill-mode both, y una animación gana a una declaración normal en
+   la cascada — poniéndole opacity: 0 se quedaba visible igual. Además su texto
+   competiría con el rótulo de la demo, que es quien cuenta la historia aquí. */
+body.grabando .tarjeta { display: none; }
+
+@media (max-width: 860px) {
+  .cine { left: 14px; right: 14px; bottom: 14px; }
+  .cine-titulo { font-size: 26px; }
+}
+
+/* ── mando sobre la escena ──────────────────────────────────────────────────
+   Antes esto eran dos paneles en la columna derecha (Vista y Conjuntos) que
+   decían lo mismo que ahora dicen los marcadores sobre el modelo. Aquí queda
+   sólo el mando, flotando sobre el agua, y así al grabar sólo el visor los
+   controles siguen saliendo. */
+.mando {
+  position: absolute; top: 12px; right: 12px; z-index: 4;
+  display: flex; flex-direction: column; gap: 8px;
+  width: 236px; padding: 10px;
+  border-radius: var(--radio);
+  background: color-mix(in srgb, var(--panel) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--linea) 70%, transparent);
+  backdrop-filter: blur(14px) saturate(1.1);
+}
+.modos-barra { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.modos-barra button {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: .07em; text-transform: uppercase;
+  padding: 8px 4px; border-radius: 6px; cursor: pointer;
+  background: var(--hueco); border: 1px solid var(--linea); color: var(--tinta);
+}
+.modos-barra button[aria-pressed="true"] {
+  background: var(--acento); border-color: var(--acento); color: var(--sobre-acento);
+}
+.deslizador-barra { margin: 0; }
+.extras { display: flex; flex-wrap: wrap; gap: 4px; }
+.extras button {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em;
+  text-transform: uppercase; padding: 5px 8px; border-radius: 5px;
+  cursor: pointer; background: transparent;
+  border: 1px solid var(--linea); color: var(--suave);
+}
+.extras button[aria-pressed="true"] {
+  background: var(--acento); border-color: var(--acento); color: var(--sobre-acento);
+}
+
+/* ── marcadores sobre el modelo ─────────────────────────────────────────── */
+.punto {
+  position: absolute; transform: translate(-50%, -50%);
+  display: flex; align-items: center; gap: 7px;
+  cursor: pointer; pointer-events: auto;
+  transition: opacity .25s ease;
+}
+.punto-bola {
+  width: 22px; height: 22px; border-radius: 50%; flex: none;
+  display: grid; place-content: center;
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  background: color-mix(in srgb, var(--panel) 86%, transparent);
+  border: 1.5px solid var(--acento); color: var(--tinta);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .45);
+}
+.punto-txt {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .09em;
+  text-transform: uppercase; white-space: nowrap; color: #fff;
+  text-shadow: 0 1px 10px rgba(0, 18, 28, .95);
+}
+.punto:hover .punto-bola,
+.punto.activo .punto-bola { background: var(--acento); color: var(--sobre-acento); }
+.punto.activo .punto-txt { color: var(--acento); }
+
+/* ── ficha del punto ────────────────────────────────────────────────────── */
+.ficha-vacia p {
+  font-family: var(--mono); font-size: 11px; line-height: 1.7;
+  color: var(--suave); margin-top: 8px;
+}
+.ficha-num {
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .14em; color: var(--acento-t); margin-top: 6px;
+}
+.ficha-cuerpo h3 {
+  font-size: 17px; font-weight: 700; letter-spacing: -.01em; margin: 2px 0 3px;
+}
+.ficha-sub {
+  font-family: var(--mono); font-size: 11px; line-height: 1.6;
+  color: var(--suave); margin-bottom: 9px;
+}
+.ficha-cerrar {
+  margin-top: 9px; width: 100%; padding: 8px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; cursor: pointer; border-radius: 6px;
+  background: transparent; border: 1px solid var(--linea); color: var(--suave);
+}
+.ficha-cerrar:hover { color: var(--tinta); border-color: var(--raya); }
+
+@media (max-width: 860px) {
+  .mando { position: static; width: auto; backdrop-filter: none; }
+}
+
+
+/* La franja de la cifra grande admite un segundo valor a la derecha: presión a
+   la izquierda y profundidad a la derecha, que son pareja. */
+.cifra span { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--acento-t); }
+
+
+/* ── las dos vistas ─────────────────────────────────────────────────────────
+   Simple: la escena y sus mandos, nada más. Es lo que ve quien llega desde el
+   vídeo, y lo que tiene que entender sin que nadie se lo explique.
+   Técnico: todo lo anterior más las cuatro columnas de datos y la línea de
+   tiempo. Un clic de distancia, no un menú. */
+.cambio-vista {
+  align-self: center; margin-left: 14px; white-space: nowrap;
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 9px 14px; border-radius: 7px; cursor: pointer;
+  background: var(--acento); border: 1px solid var(--acento);
+  color: var(--sobre-acento);
+}
+.cambio-vista .cv-b { display: none; }
+:root[data-vista="tecnico"] .cambio-vista {
+  background: transparent; color: var(--suave); border-color: var(--linea);
+}
+:root[data-vista="tecnico"] .cambio-vista .cv-a { display: none; }
+:root[data-vista="tecnico"] .cambio-vista .cv-b { display: inline; }
+
+:root[data-vista="simple"] .col { display: none; }
+:root[data-vista="simple"] #app {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "barra" "escena" "pie";
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+/* En simple sobran las herramientas de desarrollo: malla y tema son mías, no
+   del visitante. */
+:root[data-vista="simple"] .extras button.solo-tecnico { display: none; }
+
+/* ── pista de primera vez ───────────────────────────────────────────────── */
+.pista {
+  position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%);
+  padding: 10px 18px; border-radius: 999px; pointer-events: none;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  border: 1px solid var(--acento);
+  animation: respira 2.6s ease-in-out infinite;
+  transition: opacity .5s ease;
+}
+.pista p {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--tinta); margin: 0;
+}
+.pista.fuera { opacity: 0; }
+/* Nadando no hay puntos que pulsar, asi que la pista sobra. */
+.pista.oculta { display: none; }
+@keyframes respira {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--acento) 45%, transparent); }
+  50% { box-shadow: 0 0 0 9px transparent; }
+}
+@media (prefers-reduced-motion: reduce) { .pista { animation: none; } }
+
+@media (max-width: 860px) {
+  .cambio-vista { margin: 8px 0 0; width: 100%; }
+  .pista { bottom: 14px; }
+}
+
+
+/* ── ficha sobre la escena ──────────────────────────────────────────────────
+   Abajo a la izquierda, donde ya estaba el rótulo grande de estado: es el
+   hueco que la silueta del pez no suele ocupar. Ancho tasado para que nunca
+   tape al sujeto. */
+.tarjeta {
+  position: absolute; left: 22px; bottom: 22px; z-index: 5;
+  width: min(380px, calc(100% - 44px));
+  padding: 16px 18px 14px;
+  border-radius: var(--radio);
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--acento) 55%, transparent);
+  backdrop-filter: blur(16px) saturate(1.1);
+  animation: entra-tarjeta .28s ease both;
+}
+@keyframes entra-tarjeta {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .tarjeta { animation: none; } }
+
+.tarjeta-num {
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .16em; color: var(--acento-t); margin-bottom: 2px;
+}
+.tarjeta-titulo {
+  font-size: 21px; font-weight: 900; letter-spacing: -.015em;
+  line-height: 1.15; margin-bottom: 8px;
+}
+.tarjeta-texto {
+  font-size: 14px; line-height: 1.55; color: var(--tinta);
+  opacity: .88; margin-bottom: 12px;
+}
+.tarjeta-cifras {
+  /* El dl suelta dt y dd como hermanos, sin envoltorio. Con flujo por filas la
+     rejilla los repartia en el orden equivocado — el valor de uno acababa bajo
+     el rotulo del siguiente. Con dos filas y flujo por COLUMNAS, cada pareja
+     cae junta. */
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto; grid-auto-flow: column;
+  column-gap: 10px; row-gap: 1px;
+  padding-top: 11px; border-top: 1px solid var(--linea);
+}
+.tarjeta-cifras dt {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--suave); margin-bottom: 2px;
+}
+.tarjeta-cifras dd { font-family: var(--mono); font-size: 14px; font-weight: 500; }
+
+.tarjeta-pie { display: flex; gap: 7px; margin-top: 13px; }
+.tarjeta-volver, .tarjeta-accion {
+  flex: 1; padding: 10px; cursor: pointer; border-radius: 7px;
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.tarjeta-volver {
+  background: var(--acento); border: 1px solid var(--acento);
+  color: var(--sobre-acento);
+}
+.tarjeta-accion {
+  background: transparent; border: 1px solid var(--linea); color: var(--tinta);
+}
+.tarjeta-accion:hover { border-color: var(--acento); }
+
+/* Con la ficha abierta sobra el rótulo grande: dice lo mismo y se pisan. */
+.escena:has(.tarjeta:not([hidden])) .estado-grande { opacity: 0; }
+/* Y en técnico la ficha de la escena sobra: está la columna. */
+:root[data-vista="tecnico"] .tarjeta { display: none; }
+
+.ficha-texto {
+  font-size: 13px; line-height: 1.55; color: var(--tinta);
+  opacity: .85; margin-bottom: 11px;
+}
+
+@media (max-width: 860px) {
+  .tarjeta { left: 12px; right: 12px; bottom: 12px; width: auto; }
+  .tarjeta-titulo { font-size: 18px; }
+  .tarjeta-texto { font-size: 13px; }
+}
+
+/* Un mando que no se puede usar tiene que parecerlo. Nadando, los puntos de
+   interes y el giro quedan bloqueados: abrir una ficha pararia el nado, que es
+   justo lo que se esta mirando. */
+.extras button:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+/* ── rayos X ──────────────────────────────────────────────────────────────
+   A la izquierda y aparte del mando: no es un ajuste entre otros, es la otra
+   forma de mirar el bicho. Encendido se pone en acento, como el resto de lo
+   que está activo. */
+.rayosx {
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  z-index: 6; display: flex; align-items: center; gap: 9px;
+  padding: 11px 15px; border-radius: 999px; cursor: pointer;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--tinta); background: color-mix(in srgb, var(--panel) 88%, transparent);
+  border: 1px solid var(--linea);
+  backdrop-filter: blur(14px) saturate(1.1);
+  transition: background .25s ease, color .25s ease, border-color .25s ease, opacity .4s ease;
+}
+.rayosx:hover { border-color: color-mix(in srgb, var(--acento) 60%, transparent); }
+.rayosx:focus-visible { outline: 2px solid var(--acento); outline-offset: 3px; }
+.rayosx[aria-pressed="true"] {
+  background: var(--acento); color: var(--sobre-acento); border-color: var(--acento);
+}
+/* El icono: un disco que se vacía por dentro, que es lo que hace el botón. */
+.rayosx-icono {
+  width: 13px; height: 13px; border-radius: 50%; flex: none;
+  border: 2px solid currentColor;
+  background: radial-gradient(currentColor 0 34%, transparent 36%);
+  transition: background .25s ease;
+}
+.rayosx[aria-pressed="true"] .rayosx-icono { background: none; }
+body.grabando .rayosx { opacity: 0; pointer-events: none; }
+
+@media (max-width: 900px) {
+  .rayosx { top: auto; bottom: 62px; transform: none; }
+}
