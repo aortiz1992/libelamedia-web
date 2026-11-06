@@ -761,7 +761,15 @@ function construirUI() {
   // Demo sube a la barra: no es un interruptor que acompaña a otra cosa, es un
   // estado en el que la herramienta se conduce sola. Giro bajó y Demo subió por
   // la misma razón — cada uno a donde le corresponde.
-  for (const [id, txt] of [["estatico", "Static"], ["nado", "Swim"], ["demo", "Demo"]]) {
+  // Dos modos, no tres. El de demo se quito a peticion de Antonio: conducia la
+  // escena el solo y se cruzaba con lo que estuviera haciendo quien mira. En un
+  // enlace que se abre desde una red social, que la herramienta te arrebate el
+  // control es peor que no tener demo.
+  //
+  // El codigo del guion sigue mas abajo, desconectado. No se borra porque esta
+  // carpeta no esta en git: borrarlo seria tirarlo. Para devolverlo, basta con
+  // reponer "demo" en esta linea, en MANDOS_POR_MODO y en ponerModo().
+  for (const [id, txt] of [["estatico", "Static"], ["nado", "Swim"]]) {
     const b = crear("button");
     b.textContent = txt;
     b.setAttribute("aria-pressed", String(estado.modo === id));
@@ -824,7 +832,6 @@ function construirUI() {
   // Con ?demo en la dirección arranca sola: es como se graba sin que se vea
   // un ratón moviéndose por encima. Va por ponerModo para que la barra quede
   // diciendo la verdad.
-  if (location.search.includes("demo")) ponerModo("demo");
 
   $("#rayosx").onclick = () => ponerRayosX(!estado.rayosxOn);
 
@@ -989,7 +996,6 @@ function montarEscenario(gltf) {
 const MANDOS_POR_MODO = {
   estatico: ["giro", "puntos", "entorno", "grabar", "tema"],
   nado: ["fpv", "grabar", "tema"],
-  demo: ["grabar", "tema"],
 };
 
 function aplicarMando() {
@@ -1220,18 +1226,6 @@ function ponerModo(m) {
   for (const k in botonesModo) {
     botonesModo[k].setAttribute("aria-pressed", String(k === m));
   }
-  if (m === "demo") {
-    // La demo conduce ella sola: ni órbita, ni nado, ni puntos abiertos.
-    if (estado.nado) terminarNado();
-    if (estado.conjunto) seleccionarPunto(null);
-    estado.fpv = false;
-    aplicarFPV();
-    control.autoRotate = false;
-    aplicarMando();
-    arrancarCine();
-    return;
-  }
-  if (cine) pararCine();
   if (m === "nado") {
     // Nadando no hay puntos de interés: lo que se está viendo es el bicho
     // moviéndose, y una ficha abierta encima sólo tapa. Lo que sí sigue
@@ -2338,11 +2332,6 @@ function montarCompositor() {
     },
     get horneado() { return { materiales_con_ao: conAO }; },
     get ultimaEntrada() { return testigoEntrada; },
-    // Saltar a un paso del guion. Para revisar la demo sin esperarla entera:
-    // noventa segundos son muchos cuando lo que se quiere es mirar el paso
-    // siete.
-    demoPaso: (i) => { if (!cine) arrancarCine(); pasoCine(i); return GUION[cine.i].titulo; },
-    get demo() { return cine ? { paso: cine.i, de: GUION.length, titulo: GUION[cine.i].titulo, t: +cine.t.toFixed(1) } : null; },
     get entrada() {
       if (!entrada) return null;
       return {
