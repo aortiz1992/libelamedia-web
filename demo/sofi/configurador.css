@@ -480,8 +480,16 @@ body.grabando .tarjeta { display: none; }
 }
 .ficha-cerrar:hover { color: var(--tinta); border-color: var(--raya); }
 
+/* En movil el mando se queda DENTRO de la escena, pegado abajo y a todo el
+   ancho. Antes esta regla lo ponia en static: como la escena tiene altura fija,
+   overflow oculto y el lienzo ocupa el 100 %, el mando caia debajo del lienzo,
+   recortado, y en un telefono no habia forma de pulsar Static/Swim/Orbit/etc. */
 @media (max-width: 860px) {
-  .mando { position: static; width: auto; backdrop-filter: none; }
+  .mando {
+    top: auto; left: 10px; right: 10px; bottom: 10px;
+    width: auto; padding: 8px; gap: 6px;
+  }
+  .estado-grande { bottom: 104px; }
 }
 
 
@@ -544,7 +552,9 @@ body.grabando .tarjeta { display: none; }
 
 @media (max-width: 860px) {
   .cambio-vista { margin: 8px 0 0; width: 100%; }
-  .pista { bottom: 14px; }
+  /* Arriba y no abajo: abajo estan el mando y los rayos X, y la pista pisaba
+     las etiquetas del modelo. */
+  .pista { bottom: auto; top: 40px; }
 }
 
 
@@ -666,5 +676,7 @@ body.grabando .tarjeta { display: none; }
 body.grabando .rayosx { opacity: 0; pointer-events: none; }
 
 @media (max-width: 900px) {
-  .rayosx { top: auto; bottom: 62px; transform: none; }
+  /* Encima del mando (que mide unos 82 px y va pegado abajo), no encima de un
+     marcador: a 62 px se solapaba con el punto 01. */
+  .rayosx { top: auto; left: 10px; bottom: 104px; transform: none; }
 }
