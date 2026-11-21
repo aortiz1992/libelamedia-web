@@ -396,6 +396,7 @@ a { color: inherit; }
 
 .service-media.tall { aspect-ratio: 3 / 4; }
 .service-media.square { aspect-ratio: 1 / 1; }
+.service-media.wide { aspect-ratio: 16 / 9; background: #0a0a0b; }
 
 .service-media iframe {
   width: 100%;

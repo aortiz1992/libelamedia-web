@@ -2,7 +2,7 @@
 <!--
   header-video-bg.html
   ---------------------------------------------------------------------------
-  Header/hero background for libelamedia.com: a looping PLAYLIST of two
+  Header/hero background for libelamedia.com: a looping PLAYLIST of three
   muted videos fills the embed box (object-fit: cover), a dark overlay sits
   on top for contrast, and the white LIBELAMEDIA logo + a Lato tagline sit
   centered above both, positioned toward the upper part of the box. Pattern
@@ -19,6 +19,11 @@
     down to 2.9MB, same settings).
   - Logo: logoletrasblanco.png (white version, for contrast over video).
   - Font: Lato (brand font used across every other embed on this site).
+
+  Video 0 (first): arturia_hero.mp4, Arturia MiniLab teaser web cut
+  (2026-11-21), 18 s, no audio. Served from this site (assets/video/), not
+  jsDelivr: the libelamodelos3d repo is past jsDelivr's 50 MB package limit,
+  so new files there come back 403.
 
   Playlist behavior: video 1 plays once, then video 2 plays once, then it
   loops back to video 1 — continuously, no `loop` attribute on the <video>
@@ -130,6 +135,7 @@
   </div>
   <script>
     var PLAYLIST = [
+      '../assets/video/arturia_hero.mp4',
       'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/finalrendernight.mp4',
       'https://cdn.jsdelivr.net/gh/aortiz1992/libelamodelos3d@main/render_round_final.mp4'
     ];
