@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!-- BUTACA · la demo: mapa de butacas → sala en 3D → vista desde tu asiento.
+     El banco de pruebas de la geometría está en banco.html. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teatro Mirabel · Choose your seat</title>
+<meta name="description" content="See the stage from your seat before you book. A BUTACA demo by LIBELAMEDIA.">
+<link rel="canonical" href="https://www.libelamedia.com/demo/butaca/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LIBELAMEDIA">
+<meta property="og:title" content="See the stage from your seat: 3D theatre seat-view demo">
+<meta property="og:description" content="Pick a seat on the plan and fly into it: the real sightline, columns and heads in front included, before you book. Runs in the browser.">
+<meta property="og:url" content="https://www.libelamedia.com/demo/butaca/">
+<meta property="og:image" content="https://www.libelamedia.com/demo/assets/butaca-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="View of the stage from Row G, Seat 11 of a theatre in 3D, with a grand piano under spotlights and the seat details panel">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.libelamedia.com/demo/assets/butaca-og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --fondo: #110c0b; --panel: #1a1312; --panel2: #231918; --linea: #3a2a27;
+    --marfil: #efe6d6; --tenue: #b3a698; --oro: #d9b25d; --oro2: #f0d28a; --granate: #7a1220;
+    --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --sans: Jost, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--fondo); color: var(--marfil);
+               font: 15px/1.45 var(--sans); overflow: hidden; -webkit-tap-highlight-color: transparent; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  #lienzo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+
+  /* ── cabecera ── */
+  .barra { position: fixed; z-index: 5; top: 0; left: 0; right: 0; display: flex; align-items: center;
+           gap: 18px; padding: 12px max(18px, env(safe-area-inset-left)); pointer-events: none;
+           background: linear-gradient(#110c0bee, #110c0b00); }
+  .marca { font: 600 21px/1 var(--serif); letter-spacing: .14em; color: var(--oro2); white-space: nowrap; }
+  .funcion { flex: 1; min-width: 0; color: var(--tenue); font-size: 13px; white-space: nowrap;
+             overflow: hidden; text-overflow: ellipsis; }
+  .funcion b { color: var(--marfil); font-weight: 500; }
+  .firma { font-size: 12px; color: var(--tenue); white-space: nowrap; pointer-events: auto; text-decoration: none; }
+  .firma b { color: var(--marfil); letter-spacing: .08em; }
+
+  /* ── mapa de butacas ── */
+  #mapa { position: fixed; z-index: 3; inset: 0; display: flex; flex-direction: column;
+          padding: 58px 0 0; background: radial-gradient(120% 90% at 50% 0%, #2a1516 0%, var(--fondo) 62%);
+          transition: opacity .9s ease, visibility .9s; }
+  #mapa.fuera { opacity: 0; visibility: hidden; }
+  .titular { padding: 6px 20px 2px; text-align: center; }
+  .titular h1 { margin: 0; font: 500 clamp(26px, 4.4vw, 40px)/1.1 var(--serif); }
+  .titular p { margin: 4px 0 0; color: var(--tenue); font-size: 14px; }
+  .plantas { display: flex; justify-content: center; gap: 8px; padding: 12px 16px 4px; }
+  .plantas button { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--linea);
+                    background: transparent; color: var(--tenue); font-weight: 500; font-size: 14px; }
+  .plantas button[aria-pressed="true"] { background: var(--marfil); color: #1a1110; border-color: var(--marfil); }
+  .plano { flex: 1; min-height: 0; overflow: hidden; padding: 4px 8px; touch-action: none; cursor: grab; }
+  .plano svg { display: block; width: 100%; height: 100%; touch-action: none; user-select: none; }
+  .escena { fill: #2b1c19; stroke: var(--oro); stroke-width: .05; }
+  .rotulo { fill: var(--tenue); font: 500 .5px var(--sans); letter-spacing: .12em; text-anchor: middle; }
+  .fila { fill: #8f8378; font: 500 .34px var(--sans); text-anchor: middle; dominant-baseline: central; }
+  .col { fill: #0d0908; stroke: var(--oro); stroke-width: .05; }
+  .caja { fill: none; stroke: #4a3833; stroke-width: .04; stroke-dasharray: .12 .1; }
+  /* outline: none SIEMPRE. El aro de foco del navegador se mide en unidades del
+     dibujo (metros) y con el plano ampliado salía un círculo blanco de 100 px. */
+  .b { cursor: pointer; stroke: #0000; stroke-width: .07; transition: fill .15s; outline: none !important; }
+  .b:hover, .b:focus-visible { stroke: var(--marfil); }
+  .b.ocupada { fill: #2a2120 !important; cursor: not-allowed; stroke: none; }
+  .b.elegida { fill: var(--marfil) !important; stroke: var(--oro2); stroke-width: .1; }
+  .leyenda { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; padding: 8px 16px;
+             font-size: 13px; color: var(--tenue); }
+  .leyenda span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .leyenda i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .leyenda b { color: var(--marfil); font-weight: 500; }
+  .pie { display: flex; align-items: center; gap: 14px; padding: 12px max(18px, env(safe-area-inset-left))
+         calc(12px + env(safe-area-inset-bottom)); background: var(--panel); border-top: 1px solid var(--linea); }
+  .pie .sel { flex: 1; min-width: 0; }
+  .pie .sel strong { display: block; font: 600 22px/1.15 var(--serif); }
+  .pie .sel span { color: var(--tenue); font-size: 13px; }
+  .cta { padding: 13px 22px; border-radius: 10px; border: 0; background: var(--oro); color: #1b1208;
+         font-weight: 600; white-space: nowrap; }
+  .cta:hover { background: var(--oro2); }
+  .cta:disabled { background: #2c2421; color: #b3a698; cursor: default; }
+  #pista { position: fixed; z-index: 9; pointer-events: none; padding: 6px 10px; border-radius: 8px;
+           background: #0b0807f2; border: 1px solid var(--linea); font-size: 13px; white-space: nowrap;
+           transform: translate(-50%, -135%); opacity: 0; transition: opacity .12s; }
+
+  /* ── ficha de la vista ── */
+  #ficha { position: fixed; z-index: 4; right: 18px; top: 70px; width: 320px; padding: 18px;
+           background: #150f0ee8; border: 1px solid var(--linea); border-radius: 16px;
+           backdrop-filter: blur(10px); transition: opacity .45s ease, transform .45s ease, visibility .45s; }
+  #ficha.fuera { opacity: 0; visibility: hidden; transform: translateY(14px); }
+  .sello { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;
+           letter-spacing: .14em; background: var(--oro); color: #1b1208; }
+  .sello.aviso { background: #3a3530; color: var(--marfil); }
+  #ficha h2 { margin: 10px 0 2px; font: 600 30px/1.1 var(--serif); }
+  #ficha .donde { color: var(--tenue); font-size: 14px; }
+  .medidas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0 12px; }
+  .medidas div { padding: 9px 8px; border-radius: 10px; background: var(--panel2); }
+  .medidas b { display: block; font: 600 23px/1.1 var(--serif); }
+  .medidas span { font-size: 12px; color: var(--tenue); line-height: 1.25; display: block; margin-top: 2px; }
+  .nota { margin: 0 0 12px; font-size: 13px; color: var(--tenue); }
+  .mini { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+  .mini svg { width: 96px; height: 96px; flex: none; border-radius: 10px; background: var(--panel2); }
+  .mini p { margin: 0; font-size: 13px; color: var(--tenue); }
+  .mini .vecinas { display: flex; gap: 6px; margin-top: 8px; }
+  .mini .vecinas button { width: 38px; height: 34px; border-radius: 8px; border: 1px solid var(--linea);
+                          background: transparent; font-size: 17px; line-height: 1; }
+  .mini .vecinas button:disabled { opacity: .3; cursor: default; }
+  .acciones { display: flex; gap: 8px; }
+  .acciones .otra { padding: 13px 14px; border-radius: 10px; border: 1px solid var(--linea); background: transparent; }
+  .acciones .cta { flex: 1; }
+  #ayuda { position: fixed; z-index: 4; left: 50%; bottom: 22px; transform: translateX(-50%);
+           padding: 7px 14px; border-radius: 999px; background: #0b0807c0; color: var(--tenue);
+           font-size: 13px; pointer-events: none; transition: opacity .6s; white-space: nowrap; }
+  #ayuda.fuera { opacity: 0; }
+  #aviso { position: fixed; z-index: 10; left: 50%; bottom: 80px; transform: translate(-50%, 20px);
+           max-width: min(92vw, 460px); padding: 12px 16px; border-radius: 12px; background: var(--marfil);
+           color: #1a1110; font-size: 14px; opacity: 0; visibility: hidden; transition: all .3s; }
+  #aviso.ver { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+  #carga { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center; background: var(--fondo);
+           font: 500 22px var(--serif); letter-spacing: .14em; color: var(--oro2); transition: opacity .6s, visibility .6s; }
+  #carga.fuera { opacity: 0; visibility: hidden; }
+
+  @media (max-width: 720px) {
+    .firma { display: none; }
+    .marca { font-size: 17px; }
+    #mapa { padding-top: 46px; }
+    .titular { padding-top: 0; }
+    .titular h1 { font-size: 24px; }
+    .titular p { display: none; }
+    .plantas { padding: 8px 12px 2px; }
+    .plantas button { padding: 6px 14px; }
+    .leyenda { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; padding: 6px 14px;
+               font-size: 12px; scrollbar-width: none; }
+    .pie { padding-top: 10px; gap: 10px; }
+    .pie .sel strong { font-size: 19px; }
+    .cta { padding: 12px 16px; }
+    #ficha { left: 0; right: 0; top: auto; bottom: 0; width: auto; border-radius: 18px 18px 0 0;
+             border-width: 1px 0 0; padding: 14px 16px calc(14px + env(safe-area-inset-bottom)); }
+    #ficha h2 { font-size: 26px; margin-top: 8px; }
+    .medidas { margin: 10px 0; }
+    .mini svg { width: 72px; height: 72px; }
+    .nota { display: none; }
+    /* La hoja, compacta: en un móvil la vista es lo que importa y la ficha no
+       puede comerse más de un tercio de la pantalla. Fuera el mini-plano. */
+    .mini { margin-bottom: 10px; justify-content: space-between; }
+    .mini svg { display: none; }
+    .mini > div { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .mini .vecinas { margin-top: 0; }
+    .medidas { gap: 6px; }
+    .medidas div { padding: 7px 8px; }
+    .medidas b { font-size: 20px; }
+    #ayuda { bottom: auto; top: 62px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition-duration: .01s !important; } }
+</style>
+</head>
+<body>
+<canvas id="lienzo" aria-label="3D view of the auditorium"></canvas>
+
+<header class="barra">
+  <div class="marca">TEATRO MIRABEL</div>
+  <div class="funcion" id="funcion"></div>
+  <a class="firma" href="/demo/">seat-view demo by <b>LIBELAMEDIA</b></a>
+</header>
+
+<main id="mapa">
+  <div class="titular">
+    <h1>Choose your seat</h1>
+    <p>Pick any free seat and see the stage from it before you book.</p>
+  </div>
+  <div class="plantas" id="plantas" role="group" aria-label="Level"></div>
+  <div class="plano" id="plano"></div>
+  <div class="leyenda" id="leyenda"></div>
+  <div class="pie">
+    <div class="sel" id="sel"><strong>No seat selected</strong><span>Tap a seat on the plan</span></div>
+    <button class="cta" id="ver" disabled>Continue</button>
+  </div>
+</main>
+
+<aside id="ficha" class="fuera" aria-live="polite">
+  <span class="sello" id="sello"></span>
+  <h2 id="fButaca"></h2>
+  <div class="donde" id="fDonde"></div>
+  <div class="medidas">
+    <div><b id="mDist"></b><span>to the stage</span></div>
+    <div><b id="mCampo"></b><span>field of view</span></div>
+    <div><b id="mDesc"></b><span id="mDescT"></span></div>
+  </div>
+  <p class="nota" id="fNota"></p>
+  <div class="mini">
+    <svg id="mini" aria-hidden="true"></svg>
+    <div>
+      <p id="fPrecio"></p>
+      <div class="vecinas">
+        <button id="ant" aria-label="Previous free seat in this row">‹</button>
+        <button id="sig" aria-label="Next free seat in this row">›</button>
+      </div>
+    </div>
+  </div>
+  <div class="acciones">
+    <button class="otra" id="cambiar">Change seat</button>
+    <button class="cta" id="reservar"></button>
+  </div>
+</aside>
+
+<div id="ayuda" class="fuera">Drag to look around</div>
+<div id="pista"></div>
+<div id="aviso" role="status"></div>
+<div id="carga">TEATRO MIRABEL</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

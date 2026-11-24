@@ -1,0 +1,151 @@
+{
+  "id": "teatro-mirabel",
+  "nombre": "Teatro Mirabel",
+  "sala": "Sala Principal",
+  "inventado": true,
+  "notaDemo": "Sala inventada para la demo. No corresponde a ningun teatro real.",
+  "unidades": "m",
+  "alturaOjo": 1.15,
+  "escenario": {
+    "embocaduraAncho": 11.0,
+    "embocaduraAlto": 6.4,
+    "embocaduraY": 1.0,
+    "fondo": 9.0,
+    "foso": {
+      "z": 3.2,
+      "hondo": 2.2,
+      "alto": 0.85,
+      "semiancho": 5.3
+    }
+  },
+  "secciones": [
+    {
+      "id": "patio",
+      "nombre": "Patio de butacas",
+      "tipo": "patio",
+      "filas": 15,
+      "etiquetaDesde": "A",
+      "z0": 4.6,
+      "pasoFila": 0.92,
+      "y0": 0.0,
+      "rake": 0.085,
+      "pasoButaca": 0.52,
+      "anchoPasillo": 1.15,
+      "radio0": 10.6,
+      "semiancho0": 6.0,
+      "ensanche": 0.14,
+      "pasillosX": [
+        -3.3,
+        3.3
+      ]
+    },
+    {
+      "id": "anfiteatro",
+      "nombre": "Anfiteatro",
+      "tipo": "anfiteatro",
+      "filas": 5,
+      "etiquetaDesde": "A",
+      "z0": 12.3,
+      "pasoFila": 1.0,
+      "y0": 4.2,
+      "rake": 0.42,
+      "pasoButaca": 0.53,
+      "anchoPasillo": 1.1,
+      "radio0": 18.3,
+      "semiancho0": 7.6,
+      "ensanche": 0.2,
+      "pasillosX": [
+        -3.6,
+        3.6
+      ]
+    },
+    {
+      "id": "palco-izq",
+      "nombre": "Palcos izquierda",
+      "tipo": "palco",
+      "filas": 2,
+      "etiquetaDesde": "A",
+      "z0": 7.4,
+      "pasoFila": 0.85,
+      "y0": 3.1,
+      "rake": 0.28,
+      "butacas0": 4,
+      "pasoButaca": 0.68,
+      "centroX": -7.4,
+      "butacasPorFila": [
+        4,
+        3
+      ]
+    },
+    {
+      "id": "palco-der",
+      "nombre": "Palcos derecha",
+      "tipo": "palco",
+      "filas": 2,
+      "etiquetaDesde": "A",
+      "z0": 7.4,
+      "pasoFila": 0.85,
+      "y0": 3.1,
+      "rake": 0.28,
+      "butacas0": 4,
+      "pasoButaca": 0.68,
+      "centroX": 7.4,
+      "butacasPorFila": [
+        4,
+        3
+      ]
+    },
+    {
+      "id": "palco-izq-2",
+      "nombre": "Palcos izquierda · segundo orden",
+      "tipo": "palco",
+      "filas": 2,
+      "etiquetaDesde": "A",
+      "z0": 7.4,
+      "pasoFila": 0.85,
+      "y0": 5.75,
+      "rake": 0.28,
+      "butacas0": 4,
+      "pasoButaca": 0.68,
+      "centroX": -7.4,
+      "butacasPorFila": [
+        4,
+        3
+      ]
+    },
+    {
+      "id": "palco-der-2",
+      "nombre": "Palcos derecha · segundo orden",
+      "tipo": "palco",
+      "filas": 2,
+      "etiquetaDesde": "A",
+      "z0": 7.4,
+      "pasoFila": 0.85,
+      "y0": 5.75,
+      "rake": 0.28,
+      "butacas0": 4,
+      "pasoButaca": 0.68,
+      "centroX": 7.4,
+      "butacasPorFila": [
+        4,
+        3
+      ]
+    }
+  ],
+  "obstaculos": [
+    {
+      "tipo": "columna",
+      "x": -5.338,
+      "z": 12.11,
+      "radio": 0.21,
+      "alto": 3.65
+    },
+    {
+      "tipo": "columna",
+      "x": 5.338,
+      "z": 12.11,
+      "radio": 0.21,
+      "alto": 3.65
+    }
+  ]
+}
