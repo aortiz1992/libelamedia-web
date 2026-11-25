@@ -70,4 +70,60 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://www.libelamedia.com/gallery/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.libelamedia.com/gallery/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.libelamedia.com/gallery/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.libelamedia.com/gallery/" />
+  </url>
+  <url>
+    <loc>https://www.libelamedia.com/gallery/terrazas-aurelia/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.libelamedia.com/gallery/terrazas-aurelia/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.libelamedia.com/gallery/terrazas-aurelia/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.libelamedia.com/gallery/terrazas-aurelia/" />
+  </url>
+  <url>
+    <loc>https://www.libelamedia.com/gallery/footwear-store/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.libelamedia.com/gallery/footwear-store/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.libelamedia.com/gallery/footwear-store/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.libelamedia.com/gallery/footwear-store/" />
+  </url>
+  <url>
+    <loc>https://www.libelamedia.com/gallery/casa-encina/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.libelamedia.com/gallery/casa-encina/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.libelamedia.com/gallery/casa-encina/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.libelamedia.com/gallery/casa-encina/" />
+  </url>
+  <url>
+    <loc>https://www.libelamedia.com/gallery/tsumugi-chair/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.libelamedia.com/gallery/tsumugi-chair/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.libelamedia.com/gallery/tsumugi-chair/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.libelamedia.com/gallery/tsumugi-chair/" />
+  </url>
+  <url>
+    <loc>https://www.libelamedia.com/gallery/meseta-ev/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.libelamedia.com/gallery/meseta-ev/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.libelamedia.com/gallery/meseta-ev/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.libelamedia.com/gallery/meseta-ev/" />
+  </url>
+  <url>
+    <loc>https://www.libelamedia.com/gallery/arturia-minilab/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.libelamedia.com/gallery/arturia-minilab/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.libelamedia.com/gallery/arturia-minilab/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.libelamedia.com/gallery/arturia-minilab/" />
+  </url>
 </urlset>
